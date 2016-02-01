@@ -206,9 +206,9 @@ def fit_predict_model(city_data):
     y = reg.predict(x)
     
     #print reg.grid_scores_
-    #print reg.best_params_
+    print 'Best model parameter (max depth): ' + str(reg.best_params_)
     #print reg.best_score_
-    print reg.best_estimator_
+    #print reg.best_estimator_
     
     print "House: " + str(x)
     print "Prediction: " + str(y)
