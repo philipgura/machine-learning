@@ -71,7 +71,7 @@ def split_data(city_data):
     ### Step 2. YOUR CODE GOES HERE ###
     ###################################
 
-    X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.4, random_state=42)
+    X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.3, random_state=42)
 
     return X_train, y_train, X_test, y_test
 
@@ -188,7 +188,7 @@ def fit_predict_model(city_data):
     # one used in your performance_metric procedure above:
     # http://scikit-learn.org/stable/modules/generated/sklearn.metrics.make_scorer.html
 
-    p_metric = make_scorer(mean_squared_error)
+    p_metric = make_scorer(mean_squared_error, greater_is_better=False)
 
     # 2. We will use grid search to fine tune the Decision Tree Regressor and
     # obtain the parameters that generate the best training performance. Set up
@@ -208,7 +208,7 @@ def fit_predict_model(city_data):
     #print reg.grid_scores_
     #print reg.best_params_
     #print reg.best_score_
-    #print reg.best_estimator_
+    print reg.best_estimator_
     
     print "House: " + str(x)
     print "Prediction: " + str(y)
