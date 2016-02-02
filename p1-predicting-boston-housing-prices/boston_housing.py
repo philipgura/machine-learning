@@ -202,7 +202,7 @@ def fit_predict_model(city_data):
     print reg.fit(X, y)
     
     # Use the model to predict the output of a particular sample
-    x = [11.95, 0.00, 18.100, 0, 0.6590, 5.6090, 90.00, 1.385, 24, 680.0, 20.20, 332.09, 12.13]
+    x = [[11.95, 0.00, 18.100, 0, 0.6590, 5.6090, 90.00, 1.385, 24, 680.0, 20.20, 332.09, 12.13]]
     y = reg.predict(x)
     
     #print reg.grid_scores_
