@@ -12,7 +12,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn import cross_validation
 from sklearn.metrics import mean_squared_error, make_scorer
 from sklearn.grid_search import GridSearchCV
-from sklearn.svm import SVC
+from sklearn.neighbors import NearestNeighbors
 
 
 def load_data():
@@ -212,6 +212,31 @@ def fit_predict_model(city_data):
     
     print "House: " + str(x)
     print "Prediction: " + str(y)
+
+    indexes = find_nearest_neighbor_indexes(x, X)
+
+    print "Nearest neighbors average: " + str(get_nearest_neighbor_avg(indexes, city_data.target))
+
+# added after project meet specifications
+def find_nearest_neighbor_indexes(x, X): # x is a vector and X is the data set
+    
+    neigh = NearestNeighbors(n_neighbors = 10)
+    neigh.fit(X)
+
+    distance, indexes = neigh.kneighbors(x)
+
+    return indexes
+
+# added after project meet specifications
+def get_nearest_neighbor_avg(indexes, target):
+
+    sum_prices = []
+
+    for i in indexes:
+        sum_prices.append(target[i])
+        
+    return np.mean(sum_prices)
+    
 
 #In the case of the documentation page for GridSearchCV, it might be the case that the example is just a demonstration of syntax for use of the function, rather than a statement about 
 def main():
