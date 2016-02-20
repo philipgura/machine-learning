@@ -4,6 +4,10 @@ import pandas as pd
 from sklearn import svm, metrics
 from sklearn.naive_bayes import GaussianNB
 from sklearn.decomposition import PCA
+from sklearn.tree import DecisionTreeClassifier
+
+from sklearn.cross_validation import train_test_split
+from sklearn.grid_search import GridSearchCV
 
 import time
 
@@ -32,7 +36,7 @@ y_all = train_data[target_col_all]
 print "-----"
 
 #format data mini block
-mini_tdata = train_data[0:20000]
+mini_tdata = train_data[0:2000]
 
 feature_cols_mini = list(mini_tdata.columns[1:])
 target_col_mini = mini_tdata.columns[0]
@@ -44,10 +48,7 @@ y_mini = mini_tdata[target_col_mini]
 #print y_mini.head()
 
 
-from sklearn.cross_validation import train_test_split
-
 X_mtrain, X_mtest, y_mtrain, y_mtest = train_test_split(X_mini, y_mini, test_size=0.3, random_state=42)
-
 
 
 def train_classifier(clf, X_train, y_train):
@@ -67,6 +68,24 @@ def predict_labels(clf, features, target):
     print("Classification report for classifier %s:\n%s\n"
       % (clf, metrics.classification_report(target, y_pred)))
 
+def grid_search(X_train, y_train, X_test, y_test):
+    clf = DecisionTreeClassifier()
+    
+    p_metric = metrics.make_scorer(metrics.f1_score_weighted)
+    parameters = {'max_depth':(9,10,11,12,13), 'min_samples_split':(2,3,4,5,6), 'min_samples_leaf':(1,2,3,4,5), 'splitter':('best', 'random')}
+    clf = GridSearchCV(clf, parameters, scoring=p_metric, cv=10)
+
+    start = time.time()
+    clf.fit(X_train, y_train)
+    end = time.time()
+    print "Done!\nTraining grid search time (secs): {:.3f}".format(end - start)
+
+    y_pred=clf.predict(X_test)
+
+    print "Best model parameters: "+str(clf.best_params_)
+    print "Best score: "+str(clf.best_score_)
+    print "Final F1 score for test: "+str(metrics.f1_score(y_test, y_pred, average='weighted'))
+
 def apply_pca(data):
     pca = PCA(n_components=50)
     start = time.time()
@@ -76,11 +95,21 @@ def apply_pca(data):
     print pca.explained_variance_ratio_
     return reduced_data
 
+def apply_ica(data):
+    ica = FastICA(n_components=data.shape[1], random_state=42)
+    tra_data = ica.fit_transform(data)
+    return tra_data
+
 def run_test(X_train, y_train, X_test, y_test):
-    clf = GaussianNB()
     
-    #X_mtrain = apply_pca(X_mtrain)
-    #X_mtest = apply_pca(X_mtest)
+    #clf = GaussianNB()
+    clf = DecisionTreeClassifier(max_depth=11, splitter='best', min_samples_split=3, min_samples_leaf=1)
+    
+    #X_train = apply_pca(X_train)
+    #X_test = apply_pca(X_test)
+
+    X_train = apply_ica(X_train)
+    X_test = apply_ica(X_test)
 
     train_classifier(clf, X_train, y_train)
 
@@ -91,8 +120,11 @@ def run_test(X_train, y_train, X_test, y_test):
     predict_labels(clf, X_test, y_test)
 
 
+def run(X_train, y_train, X_test, y_test):
+    grid_search(X_train, y_train, X_test, y_test)
+    #run_test(X_train, y_train, X_test, y_test)
 
-run_test(X_mtrain, y_mtrain, X_mtest, y_mtest)
+run(X_mtrain, y_mtrain, X_mtest, y_mtest)
 
 
 
