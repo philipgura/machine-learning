@@ -3,7 +3,7 @@ import pandas as pd
 
 from sklearn import svm, metrics
 from sklearn.naive_bayes import GaussianNB
-from sklearn.decomposition import PCA
+from sklearn.decomposition import PCA, FastICA
 from sklearn.tree import DecisionTreeClassifier
 
 from sklearn.cross_validation import train_test_split
@@ -36,7 +36,7 @@ y_all = train_data[target_col_all]
 print "-----"
 
 #format data mini block
-mini_tdata = train_data[0:2000]
+mini_tdata = train_data[0:5000]
 
 feature_cols_mini = list(mini_tdata.columns[1:])
 target_col_mini = mini_tdata.columns[0]
@@ -48,7 +48,7 @@ y_mini = mini_tdata[target_col_mini]
 #print y_mini.head()
 
 
-X_mtrain, X_mtest, y_mtrain, y_mtest = train_test_split(X_mini, y_mini, test_size=0.3, random_state=42)
+X_mtrain, X_mtest, y_mtrain, y_mtest = train_test_split(X_mini, y_mini, test_size=0.3, random_state=42) #X_mini, y_mini
 
 
 def train_classifier(clf, X_train, y_train):
@@ -71,8 +71,8 @@ def predict_labels(clf, features, target):
 def grid_search(X_train, y_train, X_test, y_test):
     clf = DecisionTreeClassifier()
     
-    p_metric = metrics.make_scorer(metrics.f1_score_weighted)
-    parameters = {'max_depth':(9,10,11,12,13), 'min_samples_split':(2,3,4,5,6), 'min_samples_leaf':(1,2,3,4,5), 'splitter':('best', 'random')}
+    p_metric = metrics.make_scorer(metrics.f1_score, average="weighted")
+    parameters = {'max_depth':(11,12,13,14,15), 'min_samples_split':(2,3,4,5,6,7,8), 'min_samples_leaf':(1,2,3,4,5,6), 'splitter':('best', 'random')}
     clf = GridSearchCV(clf, parameters, scoring=p_metric, cv=10)
 
     start = time.time()
@@ -96,20 +96,23 @@ def apply_pca(data):
     return reduced_data
 
 def apply_ica(data):
-    ica = FastICA(n_components=data.shape[1], random_state=42)
+    ica = FastICA(n_components=100, max_iter=1000, random_state=42)
+    start = time.time()
     tra_data = ica.fit_transform(data)
+    end = time.time()
+    print "Done!\nFit transform time (secs): {:.3f}".format(end - start)
     return tra_data
 
 def run_test(X_train, y_train, X_test, y_test):
     
     #clf = GaussianNB()
-    clf = DecisionTreeClassifier(max_depth=11, splitter='best', min_samples_split=3, min_samples_leaf=1)
+    clf = DecisionTreeClassifier(max_depth=12, splitter='random', min_samples_split=5, min_samples_leaf=2)
     
     #X_train = apply_pca(X_train)
     #X_test = apply_pca(X_test)
 
-    X_train = apply_ica(X_train)
-    X_test = apply_ica(X_test)
+    #X_train = apply_ica(X_train)
+    #X_test = apply_ica(X_test)
 
     train_classifier(clf, X_train, y_train)
 
