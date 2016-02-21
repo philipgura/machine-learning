@@ -36,7 +36,7 @@ y_all = train_data[target_col_all]
 print "-----"
 
 #format data mini block
-mini_tdata = train_data[0:5000]
+mini_tdata = train_data[0:30000]
 
 feature_cols_mini = list(mini_tdata.columns[1:])
 target_col_mini = mini_tdata.columns[0]
@@ -48,7 +48,7 @@ y_mini = mini_tdata[target_col_mini]
 #print y_mini.head()
 
 
-X_mtrain, X_mtest, y_mtrain, y_mtest = train_test_split(X_mini, y_mini, test_size=0.3, random_state=42) #X_mini, y_mini
+X_mtrain, X_mtest, y_mtrain, y_mtest = train_test_split(X_all, y_all, test_size=0.3, random_state=42) #X_mini, y_mini
 
 
 def train_classifier(clf, X_train, y_train):
@@ -72,7 +72,7 @@ def grid_search(X_train, y_train, X_test, y_test):
     clf = DecisionTreeClassifier()
     
     p_metric = metrics.make_scorer(metrics.f1_score, average="weighted")
-    parameters = {'max_depth':(11,12,13,14,15), 'min_samples_split':(2,3,4,5,6,7,8), 'min_samples_leaf':(1,2,3,4,5,6), 'splitter':('best', 'random')}
+    parameters = {'max_depth':(11,12,13,14,15), 'min_samples_split':(4,5,6,7,8,9,10), 'min_samples_leaf':(2,3,4,5,6), 'splitter':('best', 'random')}
     clf = GridSearchCV(clf, parameters, scoring=p_metric, cv=10)
 
     start = time.time()
@@ -106,7 +106,7 @@ def apply_ica(data):
 def run_test(X_train, y_train, X_test, y_test):
     
     #clf = GaussianNB()
-    clf = DecisionTreeClassifier(max_depth=12, splitter='random', min_samples_split=5, min_samples_leaf=2)
+    clf = DecisionTreeClassifier(max_depth=14, splitter='best', min_samples_split=7, min_samples_leaf=5)
     
     #X_train = apply_pca(X_train)
     #X_test = apply_pca(X_test)
@@ -124,8 +124,8 @@ def run_test(X_train, y_train, X_test, y_test):
 
 
 def run(X_train, y_train, X_test, y_test):
-    grid_search(X_train, y_train, X_test, y_test)
-    #run_test(X_train, y_train, X_test, y_test)
+    #grid_search(X_train, y_train, X_test, y_test)
+    run_test(X_train, y_train, X_test, y_test)
 
 run(X_mtrain, y_mtrain, X_mtest, y_mtest)
 
