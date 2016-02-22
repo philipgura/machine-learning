@@ -5,6 +5,7 @@ from sklearn import svm, metrics
 from sklearn.naive_bayes import GaussianNB
 from sklearn.decomposition import PCA, FastICA
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.preprocessing import StandardScaler
 
 from sklearn.cross_validation import train_test_split
 from sklearn.grid_search import GridSearchCV
@@ -15,7 +16,7 @@ import time
 train_data = pd.read_csv("data/train.csv")
 print "Train data loaded!"
 
-test_data_final = None #pd.read_csv("data/test.csv")
+test_data_final = pd.read_csv("data/test.csv")
 print "Test data loaded!"
 
 #data stats
@@ -53,7 +54,7 @@ y_train_all = train_data[target_col_all]
 print "-----"
 
 #format data mini block
-mini_tdata = train_data[0:1000]
+mini_tdata = train_data[0:42000]
 
 feature_cols_mini = list(mini_tdata.columns[1:])
 target_col_mini = mini_tdata.columns[0]
@@ -64,22 +65,8 @@ y_mini = mini_tdata[target_col_mini]
 #print X_mini.head()
 #print y_mini.head()
 
-#pca = PCA(n_components=50, whiten=False)
-#X_mini = pca.fit_transform(X_mini)
-
-
-ica = FastICA(n_components=26, max_iter=1000, tol=0.07, algorithm='parallel', fun='exp', random_state=42)
-start = time.time()
-X_mini = ica.fit_transform(X_mini)
-end = time.time()
-print "Done!\nFit transform time (secs): {:.3f}".format(end - start)
-
-X_mtrain, X_mtest, y_mtrain, y_mtest = train_test_split(X_mini, y_mini, test_size=0.2, random_state=42) #X_mini, y_mini
-
-#X_train = X_train_all
-#y_train = y_train_all
-#X_test = X_test_all
-#y_test = y_test_all
+#scaler = StandardScaler()
+#X_mini = scaler.fit_transform(X_mini)
 
 
 def train_classifier(clf, X_train, y_train):
@@ -115,8 +102,8 @@ def grid_search(X_train, y_train, X_test, y_test):
     clf = DecisionTreeClassifier()
     
     p_metric = metrics.make_scorer(metrics.f1_score, average="weighted")
-    parameters = {'max_depth':(11,12), 'min_samples_split':(4,5,6,7,8), 'min_samples_leaf':(5,6), 'splitter':('best', 'random')}
-    clf = GridSearchCV(clf, parameters, scoring=p_metric, cv=10, n_jobs=6)
+    parameters = {'max_depth':(11,12), 'min_samples_split':(4,5), 'min_samples_leaf':(5,6), 'splitter':('best', 'random')}
+    clf = GridSearchCV(clf, parameters, scoring=p_metric, cv=10, n_jobs=2)
 
     start = time.time()
     clf.fit(X_train, y_train)
@@ -130,36 +117,29 @@ def grid_search(X_train, y_train, X_test, y_test):
     print "Final F1 score for test: "+str(metrics.f1_score(y_test, y_pred, average='weighted'))
 
 def apply_pca(data):
-    pca = PCA(n_components=50, whiten=False)
+    pca = PCA(n_components=76, whiten=False) #28 45 76 784
     start = time.time()
     reduced_data = pca.fit_transform(data)
     end = time.time()
-    print "Done!\nFit transform time (secs): {:.3f}".format(end - start)
+    print "Done!\nFit PCA transform time (secs): {:.3f}".format(end - start)
     print pca.explained_variance_ratio_
     return reduced_data
 
 def apply_ica(data):
-    ica = FastICA(n_components=100, max_iter=1000, random_state=42)
+    ica = FastICA(n_components=76, max_iter=1000, tol=0.02, algorithm='parallel', fun='exp', random_state=42) #26 36 76
     start = time.time()
     tra_data = ica.fit_transform(data)
     end = time.time()
-    print "Done!\nFit transform time (secs): {:.3f}".format(end - start)
+    print "Done!\nFit ICA transform time (secs): {:.3f}".format(end - start)
     return tra_data
 
 
 def run_test(X_train, y_train, X_test, y_test, test_data_final):
 
     #clf = svm.SVC()
-    #clf = GaussianNB()
+    clf = GaussianNB()
 
-
-
-    clf = DecisionTreeClassifier(max_depth=14, splitter='best', min_samples_split=7, min_samples_leaf=5)
-    
-    #X_train = apply_pca(X_train)
-
-    #X_train = apply_ica(X_train)
-    #X_test = apply_ica(X_test)
+    #clf = DecisionTreeClassifier(max_depth=14, splitter='best', min_samples_split=7, min_samples_leaf=5)
 
     train_classifier(clf, X_train, y_train)
 
@@ -169,15 +149,23 @@ def run_test(X_train, y_train, X_test, y_test, test_data_final):
     print "Test set: "
     predict_labels(clf, X_test, y_test)
 
-    #print "Test set final: "
-    #predict_labels_final(clf, test_data_final)
-
-    
+    print "Test set final: "
+    predict_labels_final(clf, test_data_final)
 
 
 def run(X_train, y_train, X_test, y_test, test_data_final):
-    grid_search(X_train, y_train, X_test, y_test)
-    #run_test(X_train, y_train, X_test, y_test, test_data_final)
+    #grid_search(X_train, y_train, X_test, y_test)
+    run_test(X_train, y_train, X_test, y_test, test_data_final)
+
+
+X_mini = apply_pca(X_mini)
+X_mini = apply_ica(X_mini)
+
+#final test data
+test_data_final = apply_pca(test_data_final)
+test_data_final = apply_ica(test_data_final)
+
+X_mtrain, X_mtest, y_mtrain, y_mtest = train_test_split(X_mini, y_mini, test_size=0.05, random_state=42) #X_mini, y_mini
 
 run(X_mtrain, y_mtrain, X_mtest, y_mtest, test_data_final)
 
