@@ -10,11 +10,9 @@ from sklearn.preprocessing import StandardScaler
 
 from sklearn.cross_validation import train_test_split
 from sklearn.grid_search import GridSearchCV
+from sklearn.ensemble import BaggingClassifier
 
 import time
-
-#scaler = StandardScaler()
-#X_mini = scaler.fit_transform(X_mini)
 
 def getDataStats(data):
     n_digits = data.shape[0]
@@ -64,7 +62,7 @@ def grid_search(X_train, y_train, X_test, y_test):
     
     p_metric = metrics.make_scorer(metrics.f1_score, average="weighted")
     #parameters = {'max_depth':(11,12,13), 'min_samples_split':(4,5), 'min_samples_leaf':(5,6)} #'splitter':('best', 'random') 'min_samples_leaf':(5,6)
-    parameters = {'n_neighbors':(9,10,11)} #'algorithm':('kd_tree', 'ball_tree'), 'p':(2,3), 'weights':('distance', 'uniform')
+    parameters = {'n_neighbors':(3,4,5,6,7,8,9), 'algorithm':['kd_tree'], 'p':(2,3), 'weights':['distance']}
     clf = GridSearchCV(clf, parameters, scoring=p_metric, cv=2, n_jobs=1)
 
     start = time.time()
@@ -78,29 +76,14 @@ def grid_search(X_train, y_train, X_test, y_test):
     print "Best score: "+str(clf.best_score_)
     print "Final F1 score for test: "+str(metrics.f1_score(y_test, y_pred, average='weighted'))
 
-def apply_pca(data):
-    pca = PCA(n_components=100, whiten=False) #28 45 76 784
-    start = time.time()
-    reduced_data = pca.fit_transform(data)
-    end = time.time()
-    print "Done!\nFit PCA transform time (secs): {:.3f}".format(end - start)
-    print pca.explained_variance_ratio_
-    return reduced_data
-
-def apply_ica(data):
-    ica = FastICA(n_components=100, max_iter=1000, tol=0.01, algorithm='parallel', fun='exp', random_state=42) #26 36 76
-    start = time.time()
-    tra_data = ica.fit_transform(data)
-    end = time.time()
-    print "Done!\nFit ICA transform time (secs): {:.3f}".format(end - start)
-    return tra_data
-
 
 def run_test(X_train, y_train, X_test, y_test, test_data_final):
 
     #clf = svm.SVC(kernel="rbf", C=100, gamma=0.001)
     #clf = GaussianNB()
-    clf = KNeighborsClassifier(n_neighbors=13, algorithm="kd_tree", leaf_size=30, p=3, weights='distance', n_jobs=8)
+    knn = KNeighborsClassifier(n_neighbors=4, algorithm="kd_tree", p=2, weights='distance', n_jobs=4)
+
+    clf = BaggingClassifier(knn, n_estimators=10, max_samples=1.0, max_features=1.0, random_state=42)
 
     #clf = DecisionTreeClassifier(max_depth=14, splitter='best', min_samples_split=7, min_samples_leaf=5)
 
@@ -112,20 +95,20 @@ def run_test(X_train, y_train, X_test, y_test, test_data_final):
     print "Test set: "
     y_pred = predict_labels(clf, X_test, y_test)
 
-    #print "Test set final: "
-    #predict_labels_final(clf, test_data_final)
+    print "Test set final: "
+    predict_labels_final(clf, test_data_final)
 
 
 def run(X_train, y_train, X_test, y_test, test_data_final):
-    grid_search(X_train, y_train, X_test, y_test)
-    #run_test(X_train, y_train, X_test, y_test, test_data_final)
+    #grid_search(X_train, y_train, X_test, y_test)
+    run_test(X_train, y_train, X_test, y_test, test_data_final)
 
 
 #get data
 train_data = pd.read_csv("data/train.csv")
 print "Train data loaded!"
 
-test_data_final = None #pd.read_csv("data/test.csv")
+test_data_final = pd.read_csv("data/test.csv")
 print "Test data loaded!"
 
 getDataStats(train_data)
@@ -140,7 +123,7 @@ y_train_all = train_data[target_col_all]
 #print y_all.head()
 
 #format data mini block
-mini_tdata = train_data[0:500]
+mini_tdata = train_data[0:42000]
 
 feature_cols_mini = list(mini_tdata.columns[1:])
 target_col_mini = mini_tdata.columns[0]
@@ -151,25 +134,27 @@ y_mini = mini_tdata[target_col_mini]
 #X_mini = apply_pca(X_mini)
 #X_mini = apply_ica(X_mini)
 
+#scaler = StandardScaler()
+#X_mini = scaler.fit_transform(X_mini)
+
 start = time.time()
-pca = PCA(n_components=28, whiten=False) #50
+pca = PCA(n_components=50, whiten=False) #51
 X_mini = pca.fit_transform(X_mini)
 end = time.time()
+print pca.explained_variance_ratio_
 print "Done!\nFit PCA transform time (secs): {:.3f}".format(end - start)
 
 
-#ica = FastICA(n_components=28, max_iter=6000, tol=0.09, algorithm='parallel', fun='exp', fun_args={'alpha': 1.0}, random_state=42) #26 36 76
+#ica = FastICA(n_components=50, max_iter=6000, tol=0.001, algorithm='parallel', fun='cube', fun_args={'alpha': 1.0}, random_state=42) #26 36 76
 #start = time.time()
 #X_mini = ica.fit_transform(X_mini)
 #end = time.time()
 #print "Done!\nFit ICA transform time (secs): {:.3f}".format(end - start)
 
 #final test data
-#test_data_final = apply_pca(test_data_final)
-#test_data_final = apply_ica(test_data_final)
-#test_data_final = pca.transform(test_data_final)
+test_data_final = pca.transform(test_data_final)
 
-X_mtrain, X_mtest, y_mtrain, y_mtest = train_test_split(X_mini, y_mini, test_size=0.1, random_state=42) #X_mini, y_mini
+X_mtrain, X_mtest, y_mtrain, y_mtest = train_test_split(X_mini, y_mini, test_size=0.001, random_state=42) #X_mini, y_mini
 
 run(X_mtrain, y_mtrain, X_mtest, y_mtest, test_data_final)
 
