@@ -6,7 +6,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.decomposition import PCA, FastICA
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 from sklearn.cross_validation import train_test_split
 from sklearn.grid_search import GridSearchCV
@@ -58,12 +58,17 @@ def predict_labels_final(clf, features):
 
 def grid_search(X_train, y_train, X_test, y_test):
     #clf = DecisionTreeClassifier()
-    clf = KNeighborsClassifier()
-    
-    p_metric = metrics.make_scorer(metrics.f1_score, average="weighted")
     #parameters = {'max_depth':(11,12,13), 'min_samples_split':(4,5), 'min_samples_leaf':(5,6)} #'splitter':('best', 'random') 'min_samples_leaf':(5,6)
-    parameters = {'n_neighbors':(3,4,5,6,7,8,9), 'algorithm':['kd_tree'], 'p':(2,3), 'weights':['distance']}
-    clf = GridSearchCV(clf, parameters, scoring=p_metric, cv=2, n_jobs=1)
+
+    #clf = KNeighborsClassifier()
+    #parameters = {'n_neighbors':(3,4,5,6,7,8,9), 'algorithm':['kd_tree'], 'p':(2,3), 'weights':['distance']}
+
+    clf = svm.SVC()
+    parameters = {'C': (4,5,6,7), 'gamma': (0.013,0.01), 'kernel': ['rbf']}
+    
+    #p_metric = metrics.make_scorer(metrics.f1_score, average="weighted")
+    #clf = GridSearchCV(clf, parameters, scoring=p_metric, cv=2, n_jobs=1)
+    clf = GridSearchCV(clf, parameters, cv=2, n_jobs=1)
 
     start = time.time()
     clf.fit(X_train, y_train)
@@ -72,20 +77,24 @@ def grid_search(X_train, y_train, X_test, y_test):
 
     y_pred = clf.predict(X_test)
 
+    print "Best model parameters: "+str(clf.best_estimator_)
     print "Best model parameters: "+str(clf.best_params_)
     print "Best score: "+str(clf.best_score_)
+    #print "Best score: "+str(clf.grid_scores_)
+    
     print "Final F1 score for test: "+str(metrics.f1_score(y_test, y_pred, average='weighted'))
 
 
 def run_test(X_train, y_train, X_test, y_test, test_data_final):
 
-    #clf = svm.SVC(kernel="rbf", C=100, gamma=0.001)
     #clf = GaussianNB()
-    knn = KNeighborsClassifier(n_neighbors=4, algorithm="kd_tree", p=2, weights='distance', n_jobs=4)
-
-    clf = BaggingClassifier(knn, n_estimators=10, max_samples=1.0, max_features=1.0, random_state=42)
-
     #clf = DecisionTreeClassifier(max_depth=14, splitter='best', min_samples_split=7, min_samples_leaf=5)
+    
+    #knn = KNeighborsClassifier(n_neighbors=4, algorithm="kd_tree", p=2, weights='distance', n_jobs=4)
+    #clf = BaggingClassifier(knn, n_estimators=10, max_samples=1.0, max_features=1.0, random_state=42)
+
+    sv = svm.SVC(kernel="rbf", C=3, gamma=0.01, cache_size=1000)
+    clf = BaggingClassifier(sv, n_estimators=10, max_samples=1.0, max_features=1.0, random_state=42)
 
     train_classifier(clf, X_train, y_train)
 
@@ -137,8 +146,14 @@ y_mini = mini_tdata[target_col_mini]
 #scaler = StandardScaler()
 #X_mini = scaler.fit_transform(X_mini)
 
+scaler = MinMaxScaler(feature_range=(-1,1))
 start = time.time()
-pca = PCA(n_components=50, whiten=False) #51
+X_mini = scaler.fit_transform(X_mini)
+end = time.time()
+print "Done!\nFit MinMaxScaler transform time (secs): {:.3f}".format(end - start)
+
+start = time.time()
+pca = PCA(n_components=50, whiten=False)
 X_mini = pca.fit_transform(X_mini)
 end = time.time()
 print pca.explained_variance_ratio_
@@ -152,9 +167,10 @@ print "Done!\nFit PCA transform time (secs): {:.3f}".format(end - start)
 #print "Done!\nFit ICA transform time (secs): {:.3f}".format(end - start)
 
 #final test data
+test_data_final = scaler.fit_transform(test_data_final)
 test_data_final = pca.transform(test_data_final)
 
-X_mtrain, X_mtest, y_mtrain, y_mtest = train_test_split(X_mini, y_mini, test_size=0.001, random_state=42) #X_mini, y_mini
+X_mtrain, X_mtest, y_mtrain, y_mtest = train_test_split(X_mini, y_mini, test_size=0.005, random_state=42) #X_mini, y_mini
 
 run(X_mtrain, y_mtrain, X_mtest, y_mtest, test_data_final)
 
