@@ -40,6 +40,16 @@ def save_file(y_pred):
     y_pred_frame.to_csv(path_or_buf='data/test_labels5.csv', sep=',', index=True, index_label='ImageId')
     print "Test data written!"
 
+def dense_to_one_hot(labels_dense, num_classes):
+    num_labels = labels_dense.shape[0]
+    index_offset = np.arange(num_labels) * num_classes
+    labels_one_hot = np.zeros((num_labels, num_classes))
+    labels_one_hot.flat[index_offset + labels_dense.ravel()] = 1
+    return labels_one_hot
+
+y_train_hot = dense_to_one_hot(y_train_all, 10)
+y_train_hot = y_train_hot.astype(np.uint8)
+
 
 ##def weight_variable(shape):
 ##  initial = tf.truncated_normal(shape, stddev=0.1)
