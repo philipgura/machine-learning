@@ -7,14 +7,35 @@ from sklearn.cross_validation import train_test_split
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 
-train_data = pd.read_csv("data/train.csv", nrows=1000)
+def save_file(y_pred):
+    y_pred_frame = pd.DataFrame(data=y_pred)
+    y_pred_frame.index +=1
+    y_pred_frame.columns = ['Label']
+
+    y_pred_frame.to_csv(path_or_buf='data/test_labels5.csv', sep=',', index=True, index_label='ImageId')
+    print "Test data written!"
+
+def dense_to_one_hot(labels_dense, num_classes):
+    num_labels = labels_dense.shape[0]
+    index_offset = np.arange(num_labels) * num_classes
+    labels_one_hot = np.zeros((num_labels, num_classes))
+    labels_one_hot.flat[index_offset + labels_dense.ravel()] = 1
+    return labels_one_hot
+
+train_data = pd.read_csv("data/train.csv", nrows=20000)
 print "Train data loaded!"
+
+test_data_final = pd.read_csv("data/test.csv")
+print "Test data loaded!"
 
 feature_cols = list(train_data.columns[1:])
 target_col = train_data.columns[0]
 
 X_train_all = train_data[feature_cols]
 y_train_all = train_data[target_col]
+
+y_train_all = dense_to_one_hot(y_train_all, 10)
+y_train_all = y_train_all.astype(np.uint8)
 
 X_train, X_test, y_train, y_test = train_test_split(X_train_all, y_train_all, test_size=0.1, random_state=42)
 
@@ -34,6 +55,7 @@ cross_entropy = -tf.reduce_sum(y_*tf.log(y))
 train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
 
 for i in range(1000):
+  #batch = mnist.train.next_batch(50)
   batch = mnist.train.next_batch(50)
   train_step.run(feed_dict={x: batch[0], y_: batch[1]})
 
@@ -41,26 +63,12 @@ correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
 
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
-print(accuracy.eval(feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
+#print(accuracy.eval(feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
 
-def save_file(y_pred):
-    y_pred_frame = pd.DataFrame(data=y_pred)
-    y_pred_frame.index +=1
-    y_pred_frame.columns = ['Label']
+print(accuracy.eval(feed_dict={x: X_test, y_: y_test}))
 
-    y_pred_frame.to_csv(path_or_buf='data/test_labels5.csv', sep=',', index=True, index_label='ImageId')
-    print "Test data written!"
-
-def dense_to_one_hot(labels_dense, num_classes):
-    num_labels = labels_dense.shape[0]
-    index_offset = np.arange(num_labels) * num_classes
-    labels_one_hot = np.zeros((num_labels, num_classes))
-    labels_one_hot.flat[index_offset + labels_dense.ravel()] = 1
-    return labels_one_hot
-
-y_train_hot = dense_to_one_hot(y_train_all, 10)
-y_train_hot = y_train_hot.astype(np.uint8)
-
+y_pred = predict.eval(feed_dict={x: test_data_final}
+save_file(y_pred)
 
 ##def weight_variable(shape):
 ##  initial = tf.truncated_normal(shape, stddev=0.1)
@@ -77,15 +85,6 @@ y_train_hot = y_train_hot.astype(np.uint8)
 ##def max_pool_2x2(x):
 ##  return tf.nn.max_pool(x, ksize=[1, 2, 2, 1],
 ##                        strides=[1, 2, 2, 1], padding='SAME')
-##
-##def save_file(y_pred):
-##    
-##    y_pred_frame = pd.DataFrame(data=y_pred)
-##    y_pred_frame.index +=1
-##    y_pred_frame.columns = ['Label']
-##
-##    y_pred_frame.to_csv(path_or_buf='data/test_labels5.csv', sep=',', index=True, index_label='ImageId')
-##    print "Test data written!"
 ##
 ##
 ###First Convolutional Layer
