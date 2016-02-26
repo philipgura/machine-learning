@@ -16,6 +16,7 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn import svm, metrics, linear_model
 from sklearn.cross_validation import train_test_split
 from sklearn.grid_search import GridSearchCV
+from sklearn.externals import joblib
 
 import time
 
@@ -98,6 +99,16 @@ def nudge_dataset2(X, Y):
     
     return X, Y
 
+def save_model(clf):
+    joblib.dump(clf, "model.pkl")
+
+    print "Model saved"
+
+def load_model():
+    clf = joblib.load('model.pkl')
+    
+    return clf
+
 def plot_components(components, name):
     plt.figure(figsize=(4.2, 4))
     for i, comp in enumerate(components):
@@ -121,6 +132,7 @@ def min_max_scaler(X):
     start = time.time()
     X = scaler.fit_transform(X)
     end = time.time()
+    
     print "Done!\nFit MinMaxScaler transform time (secs): {:.3f}".format(end - start)
 
     return X, scaler
@@ -130,6 +142,7 @@ def fit_transform_pca(X):
     pca = PCA(n_components=50, whiten=False)
     X = pca.fit_transform(X)
     end = time.time()
+    
     print pca.explained_variance_ratio_
     print "Done!\nFit PCA transform time (secs): {:.3f}".format(end - start)
 
@@ -140,6 +153,7 @@ def fit_transform_ica(X):
     start = time.time()
     X = ica.fit_transform(X)
     end = time.time()
+    
     print "Done!\nFit ICA transform time (secs): {:.3f}".format(end - start)
 
     return X, ica
@@ -164,7 +178,6 @@ def predict_labels(clf, features, target):
     return y_pred
 
 def predict_labels_final(clf, features):
-
     start = time.time()
     y_pred = clf.predict(features)
     end = time.time()
@@ -191,16 +204,16 @@ def grid_search(X_train, y_train, X_test, y_test):
 
     #Support Vector Machines ######################################
     ###############################################################
-    #clf = svm.SVC()
-    #parameters = {'C': (2,3,4,5,6,7), 'gamma': (0.011,0.01,0.009,0.008,0.007), 'kernel': ['rbf']}
+    clf = svm.SVC()
+    parameters = {'C': (2,3,4,5,6,7), 'gamma': (0.011,0.01,0.009,0.008,0.007), 'kernel': ['rbf']}
 
     #Bernoulli RBM ################################################
     ###############################################################
-    rbm = BernoulliRBM()
-    logistic = linear_model.LogisticRegression()
-    parameters = {'rbm__learning_rate': [0.1, 0.01, 0.001], 'rbm__n_iter': [20, 40, 80], 'rbm__n_components': [50, 100, 200], 'rbm__random_state': [42],
-                  'logistic__C': [1.0, 10.0, 100.0]}
-    clf = Pipeline(steps=[('rbm', rbm), ('logistic', logistic)])
+    #rbm = BernoulliRBM()
+    #logistic = linear_model.LogisticRegression()
+    #parameters = {'rbm__learning_rate': [0.1, 0.01, 0.001], 'rbm__n_iter': [20, 40, 80], 'rbm__n_components': [50, 100, 200], 'rbm__random_state': [42],
+    #              'logistic__C': [1.0, 10.0, 100.0]}
+    #clf = Pipeline(steps=[('rbm', rbm), ('logistic', logistic)])
 
     #Grid Search ##################################################
     ###############################################################
@@ -232,8 +245,7 @@ def run_test(X_train, y_train, X_test, y_test, test_data_final):
     #clf = DecisionTreeClassifier(max_depth=14, splitter='best', min_samples_split=7, min_samples_leaf=5)
     #clf = KNeighborsClassifier(n_neighbors=4, algorithm="kd_tree", p=2, weights='distance', n_jobs=4)
     #clf = BaggingClassifier(knn, n_estimators=10, max_samples=1.0, max_features=1.0, random_state=42)
-
-    clf = svm.SVC(kernel="rbf", C=3, gamma=0.008, cache_size=5000)
+    clf = svm.SVC(kernel="rbf", C=3, gamma=0.008, cache_size=1000)
 
     train_classifier(clf, X_train, y_train)
 
@@ -306,6 +318,7 @@ target_col_mini = mini_tdata.columns[0]
 X_mini = mini_tdata[feature_cols_mini]
 y_mini = mini_tdata[target_col_mini]
 
+# Expand the Data Set
 getDataStats(X_mini)
 X_mini, y_mini = nudge_dataset(X_mini, y_mini)
 getDataStats(X_mini)
