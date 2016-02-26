@@ -1,11 +1,22 @@
 import tensorflow as tf
 
+import numpy as np
+import pandas as pd
+from sklearn.cross_validation import train_test_split
+
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 
-train_data = pd.read_csv("data/train.csv" nrows=1000)
+train_data = pd.read_csv("data/train.csv", nrows=1000)
 print "Train data loaded!"
 
+feature_cols = list(train_data.columns[1:])
+target_col = train_data.columns[0]
+
+X_train_all = train_data[feature_cols]
+y_train_all = train_data[target_col]
+
+X_train, X_test, y_train, y_test = train_test_split(X_train_all, y_train_all, test_size=0.1, random_state=42)
 
 sess = tf.InteractiveSession()
 
