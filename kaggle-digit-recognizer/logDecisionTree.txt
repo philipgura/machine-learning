@@ -1,0 +1,519 @@
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 1000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [107  96 124  90 102  89  97 105  93  97]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.015
+Done!
+Training time (secs): 0.084
+Traing set: 
+Done!
+Prediction time (secs): 0.000
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     1.0000    1.0000    1.0000        92
+          1     1.0000    1.0000    1.0000        76
+          2     1.0000    1.0000    1.0000        92
+          3     1.0000    1.0000    1.0000        76
+          4     1.0000    1.0000    1.0000        77
+          5     1.0000    1.0000    1.0000        74
+          6     1.0000    1.0000    1.0000        80
+          7     1.0000    1.0000    1.0000        82
+          8     1.0000    1.0000    1.0000        78
+          9     1.0000    1.0000    1.0000        73
+
+avg / total     1.0000    1.0000    1.0000       800
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.001
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     0.7222    0.8667    0.7879        15
+          1     0.6296    0.8500    0.7234        20
+          2     0.6923    0.5625    0.6207        32
+          3     0.5000    0.6429    0.5625        14
+          4     0.5517    0.6400    0.5926        25
+          5     0.2500    0.2667    0.2581        15
+          6     0.5385    0.4118    0.4667        17
+          7     0.6429    0.3913    0.4865        23
+          8     0.7000    0.4667    0.5600        15
+          9     0.4483    0.5417    0.4906        24
+
+avg / total     0.5766    0.5650    0.5600       200
+
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 5000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [494 558 545 480 477 469 516 506 477 478]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.038
+Done!
+Training time (secs): 0.578
+Traing set: 
+Done!
+Prediction time (secs): 0.000
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     1.0000    1.0000    1.0000       394
+          1     1.0000    1.0000    1.0000       441
+          2     1.0000    1.0000    1.0000       439
+          3     1.0000    1.0000    1.0000       375
+          4     1.0000    1.0000    1.0000       386
+          5     1.0000    1.0000    1.0000       378
+          6     1.0000    1.0000    1.0000       421
+          7     1.0000    1.0000    1.0000       402
+          8     1.0000    1.0000    1.0000       376
+          9     1.0000    1.0000    1.0000       388
+
+avg / total     1.0000    1.0000    1.0000      4000
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.016
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     0.8396    0.8900    0.8641       100
+          1     0.9000    0.9231    0.9114       117
+          2     0.7273    0.7547    0.7407       106
+          3     0.6809    0.6095    0.6432       105
+          4     0.7667    0.7582    0.7624        91
+          5     0.6044    0.6044    0.6044        91
+          6     0.7549    0.8105    0.7817        95
+          7     0.7544    0.8269    0.7890       104
+          8     0.7619    0.6337    0.6919       101
+          9     0.6742    0.6667    0.6704        90
+
+avg / total     0.7504    0.7520    0.7500      1000
+
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 10000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [ 991 1095 1045 1009  967  906 1003 1039  950  995]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.075
+Done!
+Training time (secs): 1.542
+Traing set: 
+Done!
+Prediction time (secs): 0.019
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     1.0000    1.0000    1.0000       805
+          1     1.0000    1.0000    1.0000       885
+          2     1.0000    1.0000    1.0000       825
+          3     1.0000    1.0000    1.0000       819
+          4     1.0000    1.0000    1.0000       779
+          5     1.0000    1.0000    1.0000       712
+          6     1.0000    1.0000    1.0000       813
+          7     1.0000    1.0000    1.0000       806
+          8     1.0000    1.0000    1.0000       753
+          9     1.0000    1.0000    1.0000       803
+
+avg / total     1.0000    1.0000    1.0000      8000
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.000
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     0.9441    0.9086    0.9260       186
+          1     0.8540    0.9190    0.8853       210
+          2     0.7589    0.7727    0.7658       220
+          3     0.7527    0.7368    0.7447       190
+          4     0.7772    0.7979    0.7874       188
+          5     0.7526    0.7371    0.7448       194
+          6     0.8533    0.8263    0.8396       190
+          7     0.8884    0.8541    0.8709       233
+          8     0.7884    0.7563    0.7720       197
+          9     0.7073    0.7552    0.7305       192
+
+avg / total     0.8086    0.8075    0.8077      2000
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 42000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [4132 4684 4177 4351 4072 3795 4137 4401 4063 4188]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.370
+Done!
+Training time (secs): 10.553
+Traing set: 
+Done!
+Prediction time (secs): 0.071
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     1.0000    1.0000    1.0000      3316
+          1     1.0000    1.0000    1.0000      3775
+          2     1.0000    1.0000    1.0000      3331
+          3     1.0000    1.0000    1.0000      3414
+          4     1.0000    1.0000    1.0000      3233
+          5     1.0000    1.0000    1.0000      3093
+          6     1.0000    1.0000    1.0000      3352
+          7     1.0000    1.0000    1.0000      3508
+          8     1.0000    1.0000    1.0000      3228
+          9     1.0000    1.0000    1.0000      3350
+
+avg / total     1.0000    1.0000    1.0000     33600
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.015
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     0.9167    0.9167    0.9167       816
+          1     0.9110    0.9461    0.9282       909
+          2     0.8395    0.8097    0.8243       846
+          3     0.8196    0.8196    0.8196       937
+          4     0.8532    0.8451    0.8491       839
+          5     0.7736    0.7934    0.7834       702
+          6     0.8801    0.8879    0.8840       785
+          7     0.8940    0.8880    0.8910       893
+          8     0.8002    0.7868    0.7935       835
+          9     0.8373    0.8353    0.8363       838
+
+avg / total     0.8538    0.8540    0.8539      8400
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 1000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [107  96 124  90 102  89  97 105  93  97]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.015
+[ 0.09970463  0.07542846  0.06014348  0.05477071  0.04685712  0.04464145
+  0.03249051  0.02892218  0.02756132  0.02434666  0.02255439  0.01989246
+  0.01811031  0.01712279  0.01615998  0.0149236   0.01413976  0.0133436
+  0.01168899  0.01130833  0.01065675  0.01018775  0.00976819  0.0093313
+  0.00913495  0.00836832  0.00823165  0.00795272  0.00728204  0.00712798
+  0.00666459  0.00662843  0.00617452  0.0059818   0.00563298  0.00537264
+  0.00515082  0.00495734  0.00482133  0.00457585  0.0044286   0.00436422
+  0.00421783  0.00406227  0.00394718  0.00390422  0.00380792  0.00360077
+  0.00346856  0.0033972 ]
+Done!
+Fit PCA transform time (secs): 0.232
+Done!
+Training time (secs): 0.038
+Traing set: 
+Done!
+Prediction time (secs): 0.000
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     1.0000    1.0000    1.0000        92
+          1     1.0000    1.0000    1.0000        76
+          2     1.0000    1.0000    1.0000        92
+          3     1.0000    1.0000    1.0000        76
+          4     1.0000    1.0000    1.0000        77
+          5     1.0000    1.0000    1.0000        74
+          6     1.0000    1.0000    1.0000        80
+          7     1.0000    1.0000    1.0000        82
+          8     1.0000    1.0000    1.0000        78
+          9     1.0000    1.0000    1.0000        73
+
+avg / total     1.0000    1.0000    1.0000       800
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.000
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     0.7222    0.8667    0.7879        15
+          1     0.8636    0.9500    0.9048        20
+          2     0.7931    0.7188    0.7541        32
+          3     0.7500    0.6429    0.6923        14
+          4     0.5185    0.5600    0.5385        25
+          5     0.3684    0.4667    0.4118        15
+          6     0.5217    0.7059    0.6000        17
+          7     0.6875    0.4783    0.5641        23
+          8     0.5000    0.2667    0.3478        15
+          9     0.4231    0.4583    0.4400        24
+
+avg / total     0.6241    0.6150    0.6116       200
+
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 5000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [494 558 545 480 477 469 516 506 477 478]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.038
+[ 0.09695577  0.07112179  0.06099859  0.05525034  0.04849025  0.04335393
+  0.03219146  0.0285022   0.0281952   0.02344721  0.02171763  0.02043561
+  0.01744285  0.01703605  0.01598681  0.0145585   0.01316614  0.01280298
+  0.01180296  0.01153037  0.01098462  0.01049946  0.00985493  0.00947278
+  0.00890972  0.00844628  0.00820242  0.00795189  0.00732042  0.00677182
+  0.00667498  0.00653126  0.0060238   0.0059005   0.00550833  0.00535837
+  0.00511172  0.00497831  0.00477214  0.00462382  0.00456078  0.00438946
+  0.00436991  0.00407798  0.00388512  0.00379501  0.00358152  0.00356736
+  0.00337233  0.00319064]
+Done!
+Fit PCA transform time (secs): 0.650
+Done!
+Training time (secs): 0.246
+Traing set: 
+Done!
+Prediction time (secs): 0.001
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     1.0000    1.0000    1.0000       394
+          1     1.0000    1.0000    1.0000       441
+          2     1.0000    1.0000    1.0000       439
+          3     1.0000    1.0000    1.0000       375
+          4     1.0000    1.0000    1.0000       386
+          5     1.0000    1.0000    1.0000       378
+          6     1.0000    1.0000    1.0000       421
+          7     1.0000    1.0000    1.0000       402
+          8     1.0000    1.0000    1.0000       376
+          9     1.0000    1.0000    1.0000       388
+
+avg / total     1.0000    1.0000    1.0000      4000
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.000
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     0.7615    0.8300    0.7943       100
+          1     0.9076    0.9231    0.9153       117
+          2     0.7250    0.8208    0.7699       106
+          3     0.7717    0.6762    0.7208       105
+          4     0.6703    0.6703    0.6703        91
+          5     0.5577    0.6374    0.5949        91
+          6     0.7938    0.8105    0.8021        95
+          7     0.7976    0.6442    0.7128       104
+          8     0.7500    0.7129    0.7310       101
+          9     0.5909    0.5778    0.5843        90
+
+avg / total     0.7393    0.7360    0.7357      1000
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 10000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [ 991 1095 1045 1009  967  906 1003 1039  950  995]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.083
+[ 0.09684205  0.07204279  0.06198608  0.05421242  0.04818008  0.04278435
+  0.03210262  0.02871533  0.02818841  0.02351758  0.02110976  0.02030664
+  0.01736905  0.01703758  0.01591722  0.0146375   0.01320362  0.01307263
+  0.01171107  0.01168642  0.01095618  0.01035541  0.00974926  0.00917344
+  0.00889851  0.00843267  0.0082379   0.00780694  0.00737713  0.00685244
+  0.0067294   0.00645679  0.00609894  0.00584133  0.0055445   0.00533571
+  0.00511238  0.0049028   0.00479541  0.00460973  0.00449928  0.00437337
+  0.00428573  0.00400683  0.00391353  0.00379063  0.00361334  0.00348044
+  0.00341823  0.00319392]
+Done!
+Fit PCA transform time (secs): 0.937
+Done!
+Training time (secs): 0.634
+Traing set: 
+Done!
+Prediction time (secs): 0.000
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     1.0000    1.0000    1.0000       805
+          1     1.0000    1.0000    1.0000       885
+          2     1.0000    1.0000    1.0000       825
+          3     1.0000    1.0000    1.0000       819
+          4     1.0000    1.0000    1.0000       779
+          5     1.0000    1.0000    1.0000       712
+          6     1.0000    1.0000    1.0000       813
+          7     1.0000    1.0000    1.0000       806
+          8     1.0000    1.0000    1.0000       753
+          9     1.0000    1.0000    1.0000       803
+
+avg / total     1.0000    1.0000    1.0000      8000
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.000
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     0.8083    0.8387    0.8232       186
+          1     0.9037    0.9381    0.9206       210
+          2     0.7325    0.7591    0.7455       220
+          3     0.7045    0.6526    0.6776       190
+          4     0.7044    0.7606    0.7315       188
+          5     0.7500    0.6804    0.7135       194
+          6     0.8073    0.8158    0.8115       190
+          7     0.8017    0.7983    0.8000       233
+          8     0.7320    0.7208    0.7263       197
+          9     0.6862    0.6719    0.6789       192
+
+avg / total     0.7646    0.7655    0.7646      2000
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 42000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [4132 4684 4177 4351 4072 3795 4137 4401 4063 4188]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.370
+[ 0.09748496  0.07159942  0.06145625  0.05379059  0.0489404   0.04303019
+  0.03276902  0.02891973  0.02766777  0.02348765  0.0209923   0.02058908
+  0.01702477  0.01692711  0.01581055  0.01483173  0.01319628  0.0128267
+  0.01187922  0.01152703  0.01072143  0.01015154  0.00964859  0.00912805
+  0.00887601  0.00838729  0.00811819  0.00777371  0.00740602  0.00686631
+  0.00657953  0.0063877   0.0059934   0.00588887  0.0056431   0.00540943
+  0.00509199  0.00487483  0.00475548  0.00466524  0.00452932  0.00444969
+  0.00418237  0.00397488  0.00384525  0.00374903  0.00360997  0.00348507
+  0.00336473  0.00320724]
+Done!
+Fit PCA transform time (secs): 3.753
+Done!
+Training time (secs): 4.157
+Traing set: 
+Done!
+Prediction time (secs): 0.016
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     1.0000    1.0000    1.0000      3316
+          1     1.0000    1.0000    1.0000      3775
+          2     1.0000    1.0000    1.0000      3331
+          3     1.0000    1.0000    1.0000      3414
+          4     1.0000    1.0000    1.0000      3233
+          5     1.0000    1.0000    1.0000      3093
+          6     1.0000    1.0000    1.0000      3352
+          7     1.0000    1.0000    1.0000      3508
+          8     1.0000    1.0000    1.0000      3228
+          9     1.0000    1.0000    1.0000      3350
+
+avg / total     1.0000    1.0000    1.0000     33600
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.000
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     0.9059    0.8848    0.8952       816
+          1     0.9469    0.9615    0.9541       909
+          2     0.8087    0.8097    0.8092       846
+          3     0.8089    0.7951    0.8019       937
+          4     0.8077    0.7962    0.8019       839
+          5     0.7153    0.7479    0.7312       702
+          6     0.8774    0.8662    0.8718       785
+          7     0.8435    0.8511    0.8473       893
+          8     0.7821    0.7737    0.7778       835
+          9     0.7609    0.7709    0.7659       838
+
+avg / total     0.8279    0.8275    0.8276      8400
+

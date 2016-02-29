@@ -20,19 +20,22 @@ from sklearn.externals import joblib
 
 import time
 
-def getDataStats(data):
+def getDataStats(data, desc):
     n_digits = data.shape[0]
     n_features = data.shape[1]
 
-    print "Total number of digits: {}".format(n_digits)
+    print "Dataset {} --------".format(desc)
+    print "Total number of digits (images): {}".format(n_digits)
     print "Total number of features: {}".format(n_features)
 
-def nudge_dataset(X, Y):
-    """
-    This produces a dataset 5 times bigger than the original one,
-    by moving the 28x28 images in X around by 1px to left, right, down, up
-    """
-    direction_vectors = [
+    # image is square
+    image_width = image_height = np.ceil(np.sqrt(n_features)).astype(np.uint8)
+
+    print "Digit image width: {}".format(image_width)
+    print "Digit image height: {}".format(image_height)
+    
+
+direction_vectors1 = [
         [[0, 1, 0],
          [0, 0, 0],
          [0, 0, 0]],
@@ -47,28 +50,8 @@ def nudge_dataset(X, Y):
 
         [[0, 0, 0],
          [0, 0, 0],
-         [0, 1, 0]]]
+         [0, 1, 0]],
 
-    start = time.time()
-    shift = lambda x, w: convolve(x.reshape((28, 28)), mode='constant',
-                                  weights=w).ravel()
-    X = np.concatenate([X] +
-                       [np.apply_along_axis(shift, 1, X, vector)
-                        for vector in direction_vectors])
-    
-    Y = np.concatenate([Y for _ in range(5)], axis=0)
-    end = time.time()
-
-    print "Done!\nNudging time (secs): {:.3f}".format(end - start)
-    
-    return X, Y
-
-def nudge_dataset2(X, Y):
-    """
-    This produces a dataset 5 times bigger than the original one,
-    by moving the 28x28 images in X around by 1px to left, right, down, up
-    """
-    direction_vectors = [
         [[1, 0, 0],
          [0, 0, 0],
          [0, 0, 0]],
@@ -83,8 +66,37 @@ def nudge_dataset2(X, Y):
 
         [[0, 0, 0],
          [0, 0, 0],
-         [1, 0, 0]]]
+         [1, 0, 0]],
+        
+        [[0, 0, 1, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0]],
 
+        [[0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 1, 0, 0]],
+
+        [[0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 1],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0]],
+
+        [[0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [1, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0]]]
+
+def nudge_dataset(X, Y, direction_vectors):
+    """
+    This produces a dataset 5 times bigger than the original one,
+    by moving the 28x28 images in X around by 1px to left, right, down, up
+    """
     start = time.time()
     shift = lambda x, w: convolve(x.reshape((28, 28)), mode='constant',
                                   weights=w).ravel()
@@ -92,12 +104,37 @@ def nudge_dataset2(X, Y):
                        [np.apply_along_axis(shift, 1, X, vector)
                         for vector in direction_vectors])
     
-    Y = np.concatenate([Y for _ in range(5)], axis=0)
+    Y = np.concatenate([Y for _ in range(13)], axis=0)
     end = time.time()
 
     print "Done!\nNudging time (secs): {:.3f}".format(end - start)
     
     return X, Y
+
+def deskew(image, image_shape, negated=False):
+    """
+    This method deskwes an image using moments
+    :param image: a numpy nd array input image
+    :param image_shape: a tuple denoting the image`s shape
+    :param negated: a boolean flag telling  whether the input image is a negated one
+    :returns: a numpy nd array deskewd image
+    """
+    
+    # negate the image
+    if not negated:
+        image = 255-image
+
+    # calculate the moments of the image
+    m = cv2.moments(image)
+    if abs(m['mu02']) < 1e-2:
+        return image.copy()
+
+    # caclulating the skew
+    skew = m['mu11']/m['mu02']
+    M = numpy.float32([[1, skew, -0.5*image_shape[0]*skew], [0,1,0]])
+    img = cv2.warpAffine(image, M, image_shape, flags=cv2.WARP_INVERSE_MAP|cv2.INTER_LINEAR)
+    
+    return img
 
 def save_model(clf):
     joblib.dump(clf, "model.pkl")
@@ -187,7 +224,7 @@ def predict_labels_final(clf, features):
     y_pred_frame.index +=1
     y_pred_frame.columns = ['Label']
 
-    y_pred_frame.to_csv(path_or_buf='data/test_labels4.csv', sep=',', index=True, index_label='ImageId')
+    y_pred_frame.to_csv(path_or_buf='data/test_labels6.csv', sep=',', index=True, index_label='ImageId')
     print "Test data written!"
     
 
@@ -205,7 +242,8 @@ def grid_search(X_train, y_train, X_test, y_test):
     #Support Vector Machines ######################################
     ###############################################################
     clf = svm.SVC()
-    parameters = {'C': (2,3,4,5,6,7), 'gamma': (0.011,0.01,0.009,0.008,0.007), 'kernel': ['rbf']}
+    #parameters = {'C': (2,3,4,5,6,7), 'gamma': (0.011,0.01,0.009,0.008,0.007), 'kernel': ['rbf']}
+    parameters = {'C': (10,20,40), 'gamma': (0.01,0.001), 'kernel': ['poly'], 'degree': [9]}
 
     #Bernoulli RBM ################################################
     ###############################################################
@@ -243,9 +281,11 @@ def run_test(X_train, y_train, X_test, y_test, test_data_final):
 
     #clf = GaussianNB()
     #clf = DecisionTreeClassifier(max_depth=14, splitter='best', min_samples_split=7, min_samples_leaf=5)
+    clf = KNeighborsClassifier()
     #clf = KNeighborsClassifier(n_neighbors=4, algorithm="kd_tree", p=2, weights='distance', n_jobs=4)
     #clf = BaggingClassifier(knn, n_estimators=10, max_samples=1.0, max_features=1.0, random_state=42)
-    clf = svm.SVC(kernel="rbf", C=3, gamma=0.008, cache_size=1000)
+    #clf = svm.SVC(kernel="rbf", C=3, gamma=0.008, cache_size=1000)
+    #clf = svm.SVC(kernel="poly", C=10, gamma=0.01, cache_size=1000, degree=9)
 
     train_classifier(clf, X_train, y_train)
 
@@ -255,8 +295,8 @@ def run_test(X_train, y_train, X_test, y_test, test_data_final):
     print "Test set: "
     y_pred = predict_labels(clf, X_test, y_test)
 
-    print "Test set final: "
-    predict_labels_final(clf, test_data_final)
+    #print "Test set final: "
+    #predict_labels_final(clf, test_data_final)
 
 
 def run_test_rbm(X_train, y_train, X_test, y_test, test_data_final):
@@ -295,55 +335,51 @@ def run(X_train, y_train, X_test, y_test, test_data_final):
 train_data = pd.read_csv("data/train.csv", nrows=42000)
 print "Train data loaded!"
 
-test_data_final = pd.read_csv("data/test.csv")
+test_data_final = None #pd.read_csv("data/test.csv")
 print "Test data loaded!"
-
-getDataStats(train_data)
 
 feature_cols_all = list(train_data.columns[1:])
 target_col_all = train_data.columns[0]
 
-X_train_all = train_data[feature_cols_all]
-y_train_all = train_data[target_col_all]
+X_train = train_data[feature_cols_all]
+y_train = train_data[target_col_all]
 
-#print X_all.head()
-#print y_all.head()
+getDataStats(X_train, 'train')
+#getDataStats(test_data_final, 'test')
 
-# format data mini block
-mini_tdata = train_data #[0:1000]
+# calculate unique labels with count (train dataset)
+unique_features, unique_feature_count = np.unique(y_train, return_counts=True)
+print "Unique labels with count:"
+print np.asarray((unique_features, unique_feature_count))
 
-feature_cols_mini = list(mini_tdata.columns[1:])
-target_col_mini = mini_tdata.columns[0]
+#print X_train.head()
+#print y_train.head()
 
-X_mini = mini_tdata[feature_cols_mini]
-y_mini = mini_tdata[target_col_mini]
+# Draw Image
+#draw_image(X_train[0])
 
 # Expand the Data Set
-getDataStats(X_mini)
-X_mini, y_mini = nudge_dataset(X_mini, y_mini)
-getDataStats(X_mini)
-X_mini, y_mini = nudge_dataset2(X_mini, y_mini)
-getDataStats(X_mini)
+#X_train, y_train = nudge_dataset(X_train, y_train, direction_vectors1)
+#getDataStats(X_train, 'new train')
+
+#X_mini = list(map(deskew, X_mini))
 
 # Scale data
-X_mini, scaler = min_max_scaler(X_mini)
+X_train, scaler = min_max_scaler(X_train)
 
 # Transform data
-X_mini, pca = fit_transform_pca(X_mini)
+#X_train, pca = fit_transform_pca(X_train)
 
 # Plot PCA components
 #plot_components(pca.components_, 'PCA')
 
-# Draw Image
-#draw_image(X_mini[0])
-
-#X_mini, ica = fit_transform_ica(X_mini)
+#X_train, ica = fit_transform_ica(X_train)
 
 #final test data
-test_data_final = scaler.transform(test_data_final)
-test_data_final = pca.transform(test_data_final)
+#test_data_final = scaler.transform(test_data_final)
+#test_data_final = pca.transform(test_data_final)
 
-X_mtrain, X_mtest, y_mtrain, y_mtest = train_test_split(X_mini, y_mini, test_size=0.005, random_state=42) #X_mini, y_mini
+X_mtrain, X_mtest, y_mtrain, y_mtest = train_test_split(X_train, y_train, test_size=0.2, random_state=42) #X_mini, y_mini
 
 run(X_mtrain, y_mtrain, X_mtest, y_mtest, test_data_final)
 
