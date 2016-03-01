@@ -176,7 +176,7 @@ def min_max_scaler(X):
 
 def fit_transform_pca(X):
     start = time.time()
-    pca = PCA(n_components=50, whiten=False)
+    pca = PCA(n_components=50, whiten=False) #110
     X = pca.fit_transform(X)
     end = time.time()
     
@@ -186,7 +186,7 @@ def fit_transform_pca(X):
     return X, pca
 
 def fit_transform_ica(X):
-    ica = FastICA(n_components=50, max_iter=6000, tol=0.001, algorithm='parallel', fun='cube', fun_args={'alpha': 1.0}, random_state=42) #26 36 76
+    ica = FastICA(n_components=50, max_iter=2000, tol=0.05, algorithm='parallel', fun='cube', fun_args={'alpha': 1.0}, random_state=42) #26 36 76
     start = time.time()
     X = ica.fit_transform(X)
     end = time.time()
@@ -241,17 +241,21 @@ def grid_search(X_train, y_train, X_test, y_test):
 
     #Support Vector Machines ######################################
     ###############################################################
-    clf = svm.SVC()
-    #parameters = {'C': (2,3,4,5,6,7), 'gamma': (0.011,0.01,0.009,0.008,0.007), 'kernel': ['rbf']}
-    parameters = {'C': (10,20,40), 'gamma': (0.01,0.001), 'kernel': ['poly'], 'degree': [9]}
+    #clf = svm.SVC()
+    #parameters = {'C': (2,3,4), 'gamma': (0.009,0.008,0.007), 'kernel': ['rbf']}
+    #parameters = {'C': (10,20,40), 'gamma': (0.01,0.001), 'kernel': ['poly'], 'degree': [9]}
+    #parameters = {'C': (5,6), 'gamma': (0.007,0.005), 'kernel': ['poly'], 'degree': [2,3,4]}
+    #parameters = {'C': (2,3,4,5,6,7), 'gamma': (0.015,0.01,0.007,0.005), 'kernel': ['rbf']}
 
     #Bernoulli RBM ################################################
     ###############################################################
-    #rbm = BernoulliRBM()
-    #logistic = linear_model.LogisticRegression()
+    rbm = BernoulliRBM()
+    logistic = linear_model.LogisticRegression()
     #parameters = {'rbm__learning_rate': [0.1, 0.01, 0.001], 'rbm__n_iter': [20, 40, 80], 'rbm__n_components': [50, 100, 200], 'rbm__random_state': [42],
     #              'logistic__C': [1.0, 10.0, 100.0]}
-    #clf = Pipeline(steps=[('rbm', rbm), ('logistic', logistic)])
+    parameters = {'rbm__learning_rate': [0.01], 'rbm__n_iter': [20], 'rbm__n_components': [200], 'rbm__random_state': [42],
+                  'logistic__C': [10.0, 15.0]}
+    clf = Pipeline(steps=[('rbm', rbm), ('logistic', logistic)])
 
     #Grid Search ##################################################
     ###############################################################
@@ -281,11 +285,10 @@ def run_test(X_train, y_train, X_test, y_test, test_data_final):
 
     #clf = GaussianNB()
     #clf = DecisionTreeClassifier(max_depth=14, splitter='best', min_samples_split=7, min_samples_leaf=5)
-    clf = KNeighborsClassifier()
     #clf = KNeighborsClassifier(n_neighbors=4, algorithm="kd_tree", p=2, weights='distance', n_jobs=4)
     #clf = BaggingClassifier(knn, n_estimators=10, max_samples=1.0, max_features=1.0, random_state=42)
-    #clf = svm.SVC(kernel="rbf", C=3, gamma=0.008, cache_size=1000)
-    #clf = svm.SVC(kernel="poly", C=10, gamma=0.01, cache_size=1000, degree=9)
+    clf = svm.SVC(kernel="rbf", C=3, gamma=0.008, cache_size=1000)
+    #clf = svm.SVC(kernel="poly", C=2, gamma=0.01, cache_size=1000, degree=9)
 
     train_classifier(clf, X_train, y_train)
 
@@ -300,30 +303,18 @@ def run_test(X_train, y_train, X_test, y_test, test_data_final):
 
 
 def run_test_rbm(X_train, y_train, X_test, y_test, test_data_final):
-    # Models we will use
-    logistic = linear_model.LogisticRegression(C=100.0)
-    rbm = BernoulliRBM(learning_rate=0.06, n_iter=20, n_components=100, verbose=1, random_state=42) #learning_rate=0.001, n_iter=20, n_components=200, verbose=1, random_state=42
+    logistic = linear_model.LogisticRegression(C=15.0)
+    rbm = BernoulliRBM(learning_rate=0.01, n_iter=20, n_components=200, verbose=1, random_state=42) #learning_rate=0.001, n_iter=20, n_components=200, verbose=1, random_state=42
 
-    classifier = Pipeline(steps=[('rbm', rbm), ('logistic', logistic)])
+    clf = Pipeline(steps=[('rbm', rbm), ('logistic', logistic)])
 
-    # Training RBM-Logistic Pipeline
-    classifier.fit(X_train, y_train)
+    train_classifier(clf, X_train, y_train)
 
-    # Training Logistic Regression
-    logistic_classifier = linear_model.LogisticRegression(C=100.0)
-    logistic_classifier.fit(X_train, y_train)
-    
-    # Evaluation
-    print("Logistic regression using RBM features:\n%s\n" % (
-        metrics.classification_report(
-            y_test,
-            classifier.predict(X_test))))
+    print "Traing set: "
+    predict_labels(clf, X_train, y_train)
 
-    print("Logistic regression using raw pixel features:\n%s\n" % (
-        metrics.classification_report(
-            y_test,
-            logistic_classifier.predict(X_test))))
-    
+    print "Test set: "
+    y_pred = predict_labels(clf, X_test, y_test)
 
 def run(X_train, y_train, X_test, y_test, test_data_final):
     #grid_search(X_train, y_train, X_test, y_test)
@@ -366,12 +357,19 @@ print np.asarray((unique_features, unique_feature_count))
 
 # Scale data
 X_train, scaler = min_max_scaler(X_train)
+#X_train = (X_train - np.min(X_train, 0)) / (np.max(X_train, 0) + 0.0001)
 
 # Transform data
-#X_train, pca = fit_transform_pca(X_train)
+X_train, pca = fit_transform_pca(X_train)
 
 # Plot PCA components
 #plot_components(pca.components_, 'PCA')
+
+# Plot PCA componet variance
+#x = np.arange(200)
+#plt.plot(x, 1 - np.cumsum(pca.explained_variance_ratio_), '-')
+#plt.show()
+exit()
 
 #X_train, ica = fit_transform_ica(X_train)
 

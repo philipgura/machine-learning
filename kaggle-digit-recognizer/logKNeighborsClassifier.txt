@@ -1,0 +1,506 @@
+
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 1000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [107  96 124  90 102  89  97 105  93  97]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.000
+Done!
+Training time (secs): 0.015
+Traing set: 
+Done!
+Prediction time (secs): 0.687
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.9192    0.9891    0.9529        92
+          1     0.8222    0.9737    0.8916        76
+          2     0.9651    0.9022    0.9326        92
+          3     0.8780    0.9474    0.9114        76
+          4     0.9286    0.8442    0.8844        77
+          5     0.9577    0.9189    0.9379        74
+          6     0.9375    0.9375    0.9375        80
+          7     0.8706    0.9024    0.8862        82
+          8     0.9677    0.7692    0.8571        78
+          9     0.8133    0.8356    0.8243        73
+
+avg / total     0.9077    0.9038    0.9034       800
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.170
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.6818    1.0000    0.8108        15
+          1     0.7692    1.0000    0.8696        20
+          2     1.0000    0.8125    0.8966        32
+          3     0.8750    1.0000    0.9333        14
+          4     0.8750    0.8400    0.8571        25
+          5     0.9231    0.8000    0.8571        15
+          6     0.9375    0.8824    0.9091        17
+          7     0.6667    0.7826    0.7200        23
+          8     0.9091    0.6667    0.7692        15
+          9     0.7368    0.5833    0.6512        24
+
+avg / total     0.8409    0.8250    0.8239       200
+
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 5000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [494 558 545 480 477 469 516 506 477 478]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.053
+Done!
+Training time (secs): 0.226
+Traing set: 
+Done!
+Prediction time (secs): 23.145
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.9678    0.9924    0.9799       394
+          1     0.9012    0.9932    0.9450       441
+          2     0.9783    0.9248    0.9508       439
+          3     0.9420    0.9520    0.9469       375
+          4     0.9682    0.9456    0.9567       386
+          5     0.9603    0.9603    0.9603       378
+          6     0.9720    0.9881    0.9800       421
+          7     0.9454    0.9478    0.9466       402
+          8     0.9791    0.8723    0.9226       376
+          9     0.9165    0.9330    0.9246       388
+
+avg / total     0.9528    0.9517    0.9516      4000
+
+
+Test set: 
+Done!
+Prediction time (secs): 5.900
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.9600    0.9600    0.9600       100
+          1     0.8984    0.9829    0.9388       117
+          2     0.9515    0.9245    0.9378       106
+          3     0.9417    0.9238    0.9327       105
+          4     0.9419    0.8901    0.9153        91
+          5     0.9341    0.9341    0.9341        91
+          6     0.9394    0.9789    0.9588        95
+          7     0.8661    0.9327    0.8981       104
+          8     0.9643    0.8020    0.8757       101
+          9     0.8085    0.8444    0.8261        90
+
+avg / total     0.9210    0.9190    0.9187      1000
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 10000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [ 991 1095 1045 1009  967  906 1003 1039  950  995]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.079
+Done!
+Training time (secs): 0.670
+Traing set: 
+Done!
+Prediction time (secs): 93.615
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.9780    0.9925    0.9852       805
+          1     0.9262    0.9932    0.9586       885
+          2     0.9811    0.9418    0.9610       825
+          3     0.9632    0.9597    0.9615       819
+          4     0.9754    0.9666    0.9710       779
+          5     0.9556    0.9677    0.9616       712
+          6     0.9745    0.9865    0.9804       813
+          7     0.9498    0.9628    0.9563       806
+          8     0.9898    0.9044    0.9452       753
+          9     0.9478    0.9502    0.9490       803
+
+avg / total     0.9637    0.9631    0.9630      8000
+
+
+Test set: 
+Done!
+Prediction time (secs): 23.559
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.9487    0.9946    0.9711       186
+          1     0.8996    0.9810    0.9385       210
+          2     0.9808    0.9273    0.9533       220
+          3     0.9086    0.9421    0.9251       190
+          4     0.9674    0.9468    0.9570       188
+          5     0.9840    0.9485    0.9659       194
+          6     0.9894    0.9842    0.9868       190
+          7     0.9610    0.9528    0.9569       233
+          8     0.9888    0.8934    0.9387       197
+          9     0.9059    0.9531    0.9289       192
+
+avg / total     0.9536    0.9520    0.9521      2000
+
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 42000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [4132 4684 4177 4351 4072 3795 4137 4401 4063 4188]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.349
+Done!
+Training time (secs): 8.538
+Traing set: 
+Done!
+Prediction time (secs): 1617.744
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.9836    0.9955    0.9895      3316
+          1     0.9658    0.9952    0.9803      3775
+          2     0.9862    0.9688    0.9774      3331
+          3     0.9740    0.9763    0.9751      3414
+          4     0.9840    0.9728    0.9784      3233
+          5     0.9732    0.9741    0.9737      3093
+          6     0.9846    0.9911    0.9878      3352
+          7     0.9679    0.9795    0.9736      3508
+          8     0.9922    0.9467    0.9689      3228
+          9     0.9640    0.9681    0.9660      3350
+
+avg / total     0.9773    0.9772    0.9771     33600
+
+
+Test set: 
+Done!
+Prediction time (secs): 398.376
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.9771    0.9951    0.9860       816
+          1     0.9389    0.9967    0.9669       909
+          2     0.9888    0.9409    0.9643       846
+          3     0.9574    0.9605    0.9590       937
+          4     0.9842    0.9666    0.9753       839
+          5     0.9571    0.9530    0.9550       702
+          6     0.9688    0.9898    0.9792       785
+          7     0.9554    0.9597    0.9575       893
+          8     0.9885    0.9305    0.9587       835
+          9     0.9401    0.9547    0.9473       838
+
+avg / total     0.9654    0.9649    0.9648      8400
+
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 1000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [107  96 124  90 102  89  97 105  93  97]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.000
+[ 0.09970463  0.07542846  0.06014348  0.05477071  0.04685712  0.04464145
+  0.03249051  0.02892218  0.02756132  0.02434666  0.02255439  0.01989246
+  0.01811031  0.01712279  0.01615998  0.0149236   0.01413976  0.0133436
+  0.01168899  0.01130833  0.01065675  0.01018775  0.00976819  0.0093313
+  0.00913495  0.00836832  0.00823165  0.00795272  0.00728204  0.00712798
+  0.00666459  0.00662843  0.00617452  0.0059818   0.00563298  0.00537264
+  0.00515082  0.00495734  0.00482133  0.00457585  0.0044286   0.00436422
+  0.00421783  0.00406227  0.00394718  0.00390422  0.00380792  0.00360077
+  0.00346856  0.0033972 ]
+Done!
+Fit PCA transform time (secs): 0.239
+Done!
+Training time (secs): 0.002
+Traing set: 
+Done!
+Prediction time (secs): 0.050
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.9485    1.0000    0.9735        92
+          1     0.8706    0.9737    0.9193        76
+          2     0.9770    0.9239    0.9497        92
+          3     0.9103    0.9342    0.9221        76
+          4     0.9155    0.8442    0.8784        77
+          5     0.9324    0.9324    0.9324        74
+          6     0.9487    0.9250    0.9367        80
+          7     0.8824    0.9146    0.8982        82
+          8     0.9189    0.8718    0.8947        78
+          9     0.8310    0.8082    0.8194        73
+
+avg / total     0.9157    0.9150    0.9146       800
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.014
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.7895    1.0000    0.8824        15
+          1     0.8000    1.0000    0.8889        20
+          2     1.0000    0.8750    0.9333        32
+          3     0.8235    1.0000    0.9032        14
+          4     0.8000    0.8000    0.8000        25
+          5     0.9231    0.8000    0.8571        15
+          6     0.9375    0.8824    0.9091        17
+          7     0.7391    0.7391    0.7391        23
+          8     0.8462    0.7333    0.7857        15
+          9     0.7143    0.6250    0.6667        24
+
+avg / total     0.8400    0.8350    0.8331       200
+
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 5000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [494 558 545 480 477 469 516 506 477 478]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.054
+[ 0.09695577  0.07112179  0.06099859  0.05525034  0.04849025  0.04335393
+  0.03219146  0.0285022   0.0281952   0.02344721  0.02171763  0.02043561
+  0.01744285  0.01703605  0.01598681  0.0145585   0.01316614  0.01280298
+  0.01180296  0.01153037  0.01098462  0.01049946  0.00985493  0.00947278
+  0.00890972  0.00844628  0.00820242  0.00795189  0.00732042  0.00677182
+  0.00667498  0.00653126  0.0060238   0.0059005   0.00550833  0.00535837
+  0.00511172  0.00497831  0.00477214  0.00462382  0.00456078  0.00438946
+  0.00436991  0.00407798  0.00388512  0.00379501  0.00358152  0.00356736
+  0.00337233  0.00319064]
+Done!
+Fit PCA transform time (secs): 0.639
+Done!
+Training time (secs): 0.000
+Traing set: 
+Done!
+Prediction time (secs): 1.408
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.9799    0.9924    0.9861       394
+          1     0.9378    0.9909    0.9636       441
+          2     0.9678    0.9590    0.9634       439
+          3     0.9516    0.9440    0.9478       375
+          4     0.9735    0.9508    0.9620       386
+          5     0.9656    0.9656    0.9656       378
+          6     0.9675    0.9905    0.9789       421
+          7     0.9627    0.9627    0.9627       402
+          8     0.9633    0.9069    0.9342       376
+          9     0.9352    0.9304    0.9328       388
+
+avg / total     0.9604    0.9603    0.9601      4000
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.364
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.9700    0.9700    0.9700       100
+          1     0.9350    0.9829    0.9583       117
+          2     0.9524    0.9434    0.9479       106
+          3     0.9604    0.9238    0.9417       105
+          4     0.9643    0.8901    0.9257        91
+          5     0.9355    0.9560    0.9457        91
+          6     0.9394    0.9789    0.9588        95
+          7     0.8981    0.9327    0.9151       104
+          8     0.9767    0.8317    0.8984       101
+          9     0.7921    0.8889    0.8377        90
+
+avg / total     0.9337    0.9310    0.9312      1000
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 10000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [ 991 1095 1045 1009  967  906 1003 1039  950  995]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.080
+[ 0.09684205  0.07204279  0.06198608  0.05421242  0.04818008  0.04278435
+  0.03210262  0.02871533  0.02818841  0.02351758  0.02110976  0.02030664
+  0.01736905  0.01703758  0.01591722  0.0146375   0.01320362  0.01307263
+  0.01171107  0.01168642  0.01095618  0.01035541  0.00974926  0.00917344
+  0.00889851  0.00843267  0.0082379   0.00780694  0.00737713  0.00685244
+  0.0067294   0.00645679  0.00609894  0.00584133  0.0055445   0.00533571
+  0.00511238  0.0049028   0.00479541  0.00460973  0.00449928  0.00437337
+  0.00428573  0.00400683  0.00391353  0.00379063  0.00361334  0.00348044
+  0.00341823  0.00319392]
+Done!
+Fit PCA transform time (secs): 1.146
+Done!
+Training time (secs): 0.024
+Traing set: 
+Done!
+Prediction time (secs): 5.228
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.9840    0.9913    0.9876       805
+          1     0.9533    0.9910    0.9717       885
+          2     0.9814    0.9612    0.9712       825
+          3     0.9623    0.9658    0.9640       819
+          4     0.9818    0.9679    0.9748       779
+          5     0.9665    0.9719    0.9692       712
+          6     0.9735    0.9938    0.9836       813
+          7     0.9628    0.9640    0.9634       806
+          8     0.9831    0.9256    0.9535       753
+          9     0.9506    0.9577    0.9541       803
+
+avg / total     0.9697    0.9695    0.9694      8000
+
+
+Test set: 
+Done!
+Prediction time (secs): 1.333
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.9840    0.9946    0.9893       186
+          1     0.9364    0.9810    0.9581       210
+          2     0.9813    0.9545    0.9677       220
+          3     0.9577    0.9526    0.9551       190
+          4     0.9563    0.9309    0.9434       188
+          5     0.9686    0.9536    0.9610       194
+          6     0.9742    0.9947    0.9844       190
+          7     0.9781    0.9571    0.9675       233
+          8     0.9789    0.9442    0.9612       197
+          9     0.8916    0.9427    0.9165       192
+
+avg / total     0.9611    0.9605    0.9606      2000
+
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 42000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [4132 4684 4177 4351 4072 3795 4137 4401 4063 4188]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.345
+[ 0.09748496  0.07159942  0.06145625  0.05379059  0.0489404   0.04303019
+  0.03276902  0.02891973  0.02766777  0.02348765  0.0209923   0.02058908
+  0.01702477  0.01692711  0.01581055  0.01483173  0.01319628  0.0128267
+  0.01187922  0.01152703  0.01072143  0.01015154  0.00964859  0.00912805
+  0.00887601  0.00838729  0.00811819  0.00777371  0.00740602  0.00686631
+  0.00657953  0.0063877   0.0059934   0.00588887  0.0056431   0.00540943
+  0.00509199  0.00487483  0.00475548  0.00466524  0.00452932  0.00444969
+  0.00418237  0.00397488  0.00384525  0.00374903  0.00360997  0.00348507
+  0.00336473  0.00320724]
+Done!
+Fit PCA transform time (secs): 3.731
+Done!
+Training time (secs): 0.157
+Traing set: 
+Done!
+Prediction time (secs): 100.324
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.9886    0.9946    0.9916      3316
+          1     0.9804    0.9947    0.9875      3775
+          2     0.9834    0.9811    0.9823      3331
+          3     0.9811    0.9751    0.9781      3414
+          4     0.9882    0.9802    0.9842      3233
+          5     0.9806    0.9812    0.9809      3093
+          6     0.9861    0.9922    0.9891      3352
+          7     0.9781    0.9818    0.9799      3508
+          8     0.9896    0.9690    0.9792      3228
+          9     0.9711    0.9743    0.9727      3350
+
+avg / total     0.9826    0.9826    0.9826     33600
+
+
+Test set: 
+Done!
+Prediction time (secs): 26.689
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0     0.9831    0.9951    0.9890       816
+          1     0.9649    0.9978    0.9811       909
+          2     0.9809    0.9704    0.9756       846
+          3     0.9782    0.9594    0.9688       937
+          4     0.9878    0.9619    0.9746       839
+          5     0.9660    0.9715    0.9687       702
+          6     0.9737    0.9885    0.9810       785
+          7     0.9664    0.9675    0.9670       893
+          8     0.9803    0.9557    0.9679       835
+          9     0.9459    0.9594    0.9526       838
+
+avg / total     0.9728    0.9726    0.9726      8400

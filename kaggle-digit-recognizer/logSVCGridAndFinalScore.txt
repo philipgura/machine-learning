@@ -1,0 +1,357 @@
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 5000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [494 558 545 480 477 469 516 506 477 478]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.054
+[ 0.09695577  0.07112179  0.06099859  0.05525034  0.04849025  0.04335393
+  0.03219146  0.0285022   0.0281952   0.02344721  0.02171763  0.02043561
+  0.01744285  0.01703605  0.01598681  0.0145585   0.01316614  0.01280298
+  0.01180296  0.01153037  0.01098462  0.01049946  0.00985493  0.00947278
+  0.00890972  0.00844628  0.00820242  0.00795189  0.00732042  0.00677182
+  0.00667498  0.00653126  0.0060238   0.0059005   0.00550833  0.00535837
+  0.00511172  0.00497831  0.00477214  0.00462382  0.00456078  0.00438946
+  0.00436991  0.00407798  0.00388512  0.00379501  0.00358152  0.00356736
+  0.00337233  0.00319064]
+Done!
+Fit PCA transform time (secs): 0.617
+Fitting 5 folds for each of 20 candidates, totalling 100 fits
+[Parallel(n_jobs=1)]: Done  49 tasks       | elapsed:   45.5s
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  1.4min finished
+Done!
+Training grid search time (secs): 82.396
+Best model parameters: SVC(C=5, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=0.01, kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Best model parameters: {'kernel': 'rbf', 'C': 5, 'gamma': 0.01}
+Best score: 0.96125
+Final F1 score for test: 0.963925193244
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 5000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [494 558 545 480 477 469 516 506 477 478]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.038
+[ 0.09695577  0.07112179  0.06099859  0.05525034  0.04849025  0.04335393
+  0.03219146  0.0285022   0.0281952   0.02344721  0.02171763  0.02043561
+  0.01744285  0.01703605  0.01598681  0.0145585   0.01316614  0.01280298
+  0.01180296  0.01153037  0.01098462  0.01049946  0.00985493  0.00947278
+  0.00890972  0.00844628  0.00820242  0.00795189  0.00732042  0.00677182
+  0.00667498  0.00653126  0.0060238   0.0059005   0.00550833  0.00535837
+  0.00511172  0.00497831  0.00477214  0.00462382  0.00456078  0.00438946
+  0.00436991  0.00407798  0.00388512  0.00379501  0.00358152  0.00356736
+  0.00337233  0.00319064]
+Done!
+Fit PCA transform time (secs): 0.648
+Fitting 5 folds for each of 24 candidates, totalling 120 fits
+[Parallel(n_jobs=1)]: Done  49 tasks       | elapsed:   38.2s
+[Parallel(n_jobs=1)]: Done 120 out of 120 | elapsed:  1.5min finished
+Done!
+Training grid search time (secs): 88.825
+Best model parameters: SVC(C=4, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=0.007, kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Best model parameters: {'kernel': 'rbf', 'C': 4, 'gamma': 0.007}
+Best score: 0.962
+Final F1 score for test: 0.96390982875
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 5000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [494 558 545 480 477 469 516 506 477 478]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.047
+[ 0.09695577  0.07112179  0.06099859  0.05525034  0.04849025  0.04335393
+  0.03219146  0.0285022   0.0281952   0.02344721  0.02171763  0.02043561
+  0.01744285  0.01703605  0.01598681  0.0145585   0.01316614  0.01280298
+  0.01180296  0.01153037  0.01098462  0.01049946  0.00985493  0.00947278
+  0.00890972  0.00844628  0.00820242  0.00795189  0.00732042  0.00677182
+  0.00667498  0.00653126  0.0060238   0.0059005   0.00550833  0.00535837
+  0.00511172  0.00497831  0.00477214  0.00462382  0.00456078  0.00438946
+  0.00436991  0.00407798  0.00388512  0.00379501  0.00358152  0.00356736
+  0.00337233  0.00319064]
+Done!
+Fit PCA transform time (secs): 0.594
+Fitting 5 folds for each of 9 candidates, totalling 45 fits
+[Parallel(n_jobs=1)]: Done  45 out of  45 | elapsed:   23.8s finished
+Done!
+Training grid search time (secs): 24.586
+Best model parameters: SVC(C=3, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=0.008, kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Best model parameters: {'kernel': 'rbf', 'C': 3, 'gamma': 0.008}
+Best score: 0.96225
+Final F1 score for test: 0.965925616825
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 5000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [494 558 545 480 477 469 516 506 477 478]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.047
+[ 0.09695577  0.07112179  0.06099859  0.05525034  0.04849025  0.04335393
+  0.03219146  0.0285022   0.0281952   0.02344721  0.02171763  0.02043561
+  0.01744285  0.01703605  0.01598681  0.0145585   0.01316614  0.01280298
+  0.01180296  0.01153037  0.01098462  0.01049946  0.00985493  0.00947278
+  0.00890972  0.00844628  0.00820242  0.00795189  0.00732042  0.00677182
+  0.00667498  0.00653126  0.0060238   0.0059005   0.00550833  0.00535837
+  0.00511172  0.00497831  0.00477214  0.00462382  0.00456078  0.00438946
+  0.00436991  0.00407798  0.00388512  0.00379501  0.00358152  0.00356736
+  0.00337233  0.00319064]
+Done!
+Fit PCA transform time (secs): 0.596
+Fitting 5 folds for each of 9 candidates, totalling 45 fits
+[Parallel(n_jobs=1)]: Done  45 out of  45 | elapsed:   26.6s finished
+Done!
+Training grid search time (secs): 27.371
+Best model parameters: SVC(C=3, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=0.008, kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Best model parameters: {'kernel': 'rbf', 'C': 3, 'gamma': 0.008}
+Best score: 0.96225
+Final F1 score for test: 0.965925616825
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 5000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [494 558 545 480 477 469 516 506 477 478]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.031
+[ 0.09695577  0.07112179  0.06099859  0.05525034  0.04849025  0.04335393
+  0.03219146  0.0285022   0.0281952   0.02344721  0.02171763  0.02043561
+  0.01744285  0.01703605  0.01598681  0.0145585   0.01316614  0.01280298
+  0.01180296  0.01153037  0.01098462  0.01049946  0.00985493  0.00947278
+  0.00890972  0.00844628  0.00820242  0.00795189  0.00732042  0.00677182
+  0.00667498  0.00653126  0.0060238   0.0059005   0.00550833  0.00535837
+  0.00511172  0.00497831  0.00477214  0.00462382  0.00456078  0.00438946
+  0.00436991  0.00407798  0.00388512  0.00379501  0.00358152  0.00356736
+  0.00337233  0.00319064]
+Done!
+Fit PCA transform time (secs): 0.649
+Fitting 5 folds for each of 45 candidates, totalling 225 fits
+[Parallel(n_jobs=1)]: Done  49 tasks       | elapsed:   39.1s
+[Parallel(n_jobs=1)]: Done 199 tasks       | elapsed:  2.8min
+[Parallel(n_jobs=1)]: Done 225 out of 225 | elapsed:  3.3min finished
+Done!
+Training grid search time (secs): 196.773
+Best model parameters: SVC(C=5, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=5, gamma=0.1, kernel='poly',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Best model parameters: {'kernel': 'poly', 'C': 5, 'gamma': 0.1, 'degree': 5}
+Best score: 0.928
+Final F1 score for test: 0.935932063248
+
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 5000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [494 558 545 480 477 469 516 506 477 478]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.048
+[ 0.09695577  0.07112179  0.06099859  0.05525034  0.04849025  0.04335393
+  0.03219146  0.0285022   0.0281952   0.02344721  0.02171763  0.02043561
+  0.01744285  0.01703605  0.01598681  0.0145585   0.01316614  0.01280298
+  0.01180296  0.01153037  0.01098462  0.01049946  0.00985493  0.00947278
+  0.00890972  0.00844628  0.00820242  0.00795189  0.00732042  0.00677182
+  0.00667498  0.00653126  0.0060238   0.0059005   0.00550833  0.00535837
+  0.00511172  0.00497831  0.00477214  0.00462382  0.00456078  0.00438946
+  0.00436991  0.00407798  0.00388512  0.00379501  0.00358152  0.00356736
+  0.00337233  0.00319064]
+Done!
+Fit PCA transform time (secs): 0.639
+Fitting 5 folds for each of 36 candidates, totalling 180 fits
+[Parallel(n_jobs=1)]: Done  49 tasks       | elapsed:   40.3s
+[Parallel(n_jobs=1)]: Done 180 out of 180 | elapsed:  2.5min finished
+Done!
+Training grid search time (secs): 151.293
+Best model parameters: SVC(C=6, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=4, gamma=0.005, kernel='poly',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Best model parameters: {'kernel': 'poly', 'C': 6, 'gamma': 0.005, 'degree': 4}
+Best score: 0.93825
+Final F1 score for test: 0.939160485761
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 5000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [494 558 545 480 477 469 516 506 477 478]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.037
+[ 0.09695577  0.07112179  0.06099859  0.05525034  0.04849025  0.04335393
+  0.03219146  0.0285022   0.0281952   0.02344721  0.02171763  0.02043561
+  0.01744285  0.01703605  0.01598681  0.0145585   0.01316614  0.01280298
+  0.01180296  0.01153037  0.01098462  0.01049946  0.00985493  0.00947278
+  0.00890972  0.00844628  0.00820242  0.00795189  0.00732042  0.00677182
+  0.00667498  0.00653126  0.0060238   0.0059005   0.00550833  0.00535837
+  0.00511172  0.00497831  0.00477214  0.00462382  0.00456078  0.00438946
+  0.00436991  0.00407798  0.00388512  0.00379501  0.00358152  0.00356736
+  0.00337233  0.00319064]
+Done!
+Fit PCA transform time (secs): 0.594
+Fitting 5 folds for each of 27 candidates, totalling 135 fits
+[Parallel(n_jobs=1)]: Done  49 tasks       | elapsed:   31.1s
+[Parallel(n_jobs=1)]: Done 135 out of 135 | elapsed:  1.5min finished
+Done!
+Training grid search time (secs): 88.931
+Best model parameters: SVC(C=6, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=0.005, kernel='poly',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Best model parameters: {'kernel': 'poly', 'C': 6, 'gamma': 0.005, 'degree': 3}
+Best score: 0.9605
+Final F1 score for test: 0.956997550843
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 5000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [494 558 545 480 477 469 516 506 477 478]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.045
+[ 0.09695577  0.07112179  0.06099859  0.05525034  0.04849025  0.04335393
+  0.03219146  0.0285022   0.0281952   0.02344721  0.02171763  0.02043561
+  0.01744285  0.01703605  0.01598681  0.0145585   0.01316614  0.01280298
+  0.01180296  0.01153037  0.01098462  0.01049946  0.00985493  0.00947278
+  0.00890972  0.00844628  0.00820242  0.00795189  0.00732042  0.00677182
+  0.00667498  0.00653126  0.0060238   0.0059005   0.00550833  0.00535837
+  0.00511172  0.00497831  0.00477214  0.00462382  0.00456078  0.00438946
+  0.00436991  0.00407798  0.00388512  0.00379501  0.00358152  0.00356736
+  0.00337233  0.00319064]
+Done!
+Fit PCA transform time (secs): 0.622
+Fitting 5 folds for each of 12 candidates, totalling 60 fits
+[Parallel(n_jobs=1)]: Done  49 tasks       | elapsed:   23.5s
+[Parallel(n_jobs=1)]: Done  60 out of  60 | elapsed:   31.1s finished
+Done!
+Training grid search time (secs): 31.736
+Best model parameters: SVC(C=5, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=0.005, kernel='poly',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Best model parameters: {'kernel': 'poly', 'C': 5, 'gamma': 0.005, 'degree': 3}
+Best score: 0.9605
+Final F1 score for test: 0.958020207645
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 42000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [4132 4684 4177 4351 4072 3795 4137 4401 4063 4188]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.347
+[ 0.09748496  0.07159942  0.06145625  0.05379059  0.0489404   0.04303019
+  0.03276902  0.02891973  0.02766777  0.02348765  0.0209923   0.02058908
+  0.01702477  0.01692711  0.01581055  0.01483173  0.01319628  0.0128267
+  0.01187922  0.01152703  0.01072143  0.01015154  0.00964859  0.00912805
+  0.00887601  0.00838729  0.00811819  0.00777371  0.00740602  0.00686631
+  0.00657953  0.0063877   0.0059934   0.00588887  0.0056431   0.00540943
+  0.00509199  0.00487483  0.00475548  0.00466524  0.00452932  0.00444969
+  0.00418237  0.00397488  0.00384525  0.00374903  0.00360997  0.00348507
+  0.00336473  0.00320724]
+Done!
+Fit PCA transform time (secs): 3.570
+Done!
+Training time (secs): 15.949
+Traing set: 
+Done!
+Prediction time (secs): 18.496
+Classification report for classifier SVC(C=3, cache_size=1000, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=0.008, kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     0.9994    1.0000    0.9997      3316
+          1     0.9979    0.9992    0.9985      3775
+          2     1.0000    0.9985    0.9992      3331
+          3     0.9997    0.9991    0.9994      3414
+          4     0.9978    0.9975    0.9977      3233
+          5     0.9990    0.9994    0.9992      3093
+          6     0.9994    0.9997    0.9996      3352
+          7     0.9940    0.9971    0.9956      3508
+          8     1.0000    0.9988    0.9994      3228
+          9     0.9970    0.9946    0.9958      3350
+
+avg / total     0.9984    0.9984    0.9984     33600
+
+
+Test set: 
+Done!
+Prediction time (secs): 4.633
+Classification report for classifier SVC(C=3, cache_size=1000, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=0.008, kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     0.9914    0.9926    0.9920       816
+          1     0.9869    0.9934    0.9901       909
+          2     0.9811    0.9823    0.9817       846
+          3     0.9807    0.9744    0.9775       937
+          4     0.9797    0.9785    0.9791       839
+          5     0.9758    0.9772    0.9765       702
+          6     0.9835    0.9885    0.9860       785
+          7     0.9842    0.9776    0.9809       893
+          8     0.9820    0.9808    0.9814       835
+          9     0.9726    0.9737    0.9732       838
+
+avg / total     0.9819    0.9819    0.9819      8400

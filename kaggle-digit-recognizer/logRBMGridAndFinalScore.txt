@@ -1,0 +1,207 @@
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 1000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [107  96 124  90 102  89  97 105  93  97]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.013
+Fitting 2 folds for each of 81 candidates, totalling 162 fits
+[Parallel(n_jobs=1)]: Done  49 tasks       | elapsed:  2.5min
+[Parallel(n_jobs=1)]: Done 162 out of 162 | elapsed:  9.4min finished
+Done!
+Training grid search time (secs): 584.134
+Best model parameters: Pipeline(steps=[('rbm', BernoulliRBM(batch_size=10, learning_rate=0.01, n_components=200, n_iter=80,
+       random_state=42, verbose=0)), ('logistic', LogisticRegression(C=10.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False))])
+Best model parameters: {'logistic__C': 10.0, 'rbm__n_iter': 80, 'rbm__learning_rate': 0.01, 'rbm__random_state': 42, 'rbm__n_components': 200}
+Best score: 0.885
+Final F1 score for test: 0.894410516035
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 1000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [107  96 124  90 102  89  97 105  93  97]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.016
+Fitting 2 folds for each of 6 candidates, totalling 12 fits
+[Parallel(n_jobs=1)]: Done  12 out of  12 | elapsed:   25.6s finished
+Done!
+Training grid search time (secs): 31.090
+Best model parameters: Pipeline(steps=[('rbm', BernoulliRBM(batch_size=10, learning_rate=0.01, n_components=200, n_iter=20,
+       random_state=42, verbose=0)), ('logistic', LogisticRegression(C=15.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False))])
+Best model parameters: {'logistic__C': 15.0, 'rbm__n_iter': 20, 'rbm__learning_rate': 0.01, 'rbm__random_state': 42, 'rbm__n_components': 200}
+Best score: 0.8375
+Final F1 score for test: 0.873788366263
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 1000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [107  96 124  90 102  89  97 105  93  97]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.000
+Fitting 2 folds for each of 9 candidates, totalling 18 fits
+[Parallel(n_jobs=1)]: Done  18 out of  18 | elapsed:   49.8s finished
+Done!
+Training grid search time (secs): 55.471
+Best model parameters: Pipeline(steps=[('rbm', BernoulliRBM(batch_size=10, learning_rate=0.01, n_components=200, n_iter=20,
+       random_state=42, verbose=0)), ('logistic', LogisticRegression(C=17.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False))])
+Best model parameters: {'logistic__C': 17.0, 'rbm__n_iter': 20, 'rbm__learning_rate': 0.01, 'rbm__random_state': 42, 'rbm__n_components': 200}
+Best score: 0.83875
+Final F1 score for test: 0.868512203115
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 1000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [107  96 124  90 102  89  97 105  93  97]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.016
+Fitting 2 folds for each of 3 candidates, totalling 6 fits
+[Parallel(n_jobs=1)]: Done   6 out of   6 | elapsed:   16.3s finished
+Done!
+Training grid search time (secs): 21.798
+Best model parameters: Pipeline(steps=[('rbm', BernoulliRBM(batch_size=10, learning_rate=0.01, n_components=200, n_iter=20,
+       random_state=42, verbose=0)), ('logistic', LogisticRegression(C=17.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False))])
+Best model parameters: {'logistic__C': 17.0, 'rbm__n_iter': 20, 'rbm__learning_rate': 0.01, 'rbm__random_state': 42, 'rbm__n_components': 200}
+Best score: 0.83875
+Final F1 score for test: 0.868512203115
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 1000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [107  96 124  90 102  89  97 105  93  97]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.000
+Fitting 2 folds for each of 2 candidates, totalling 4 fits
+[Parallel(n_jobs=1)]: Done   4 out of   4 | elapsed:   10.7s finished
+Done!
+Training grid search time (secs): 16.200
+Best model parameters: Pipeline(steps=[('rbm', BernoulliRBM(batch_size=10, learning_rate=0.01, n_components=200, n_iter=20,
+       random_state=42, verbose=0)), ('logistic', LogisticRegression(C=15.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False))])
+Best model parameters: {'logistic__C': 15.0, 'rbm__n_iter': 20, 'rbm__learning_rate': 0.01, 'rbm__random_state': 42, 'rbm__n_components': 200}
+Best score: 0.8375
+Final F1 score for test: 0.873788366263
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 42000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [4132 4684 4177 4351 4072 3795 4137 4401 4063 4188]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.403
+[BernoulliRBM] Iteration 1, pseudo-likelihood = -113.11, time = 10.37s
+[BernoulliRBM] Iteration 2, pseudo-likelihood = -97.28, time = 12.01s
+[BernoulliRBM] Iteration 3, pseudo-likelihood = -90.18, time = 12.02s
+[BernoulliRBM] Iteration 4, pseudo-likelihood = -84.76, time = 11.68s
+[BernoulliRBM] Iteration 5, pseudo-likelihood = -82.96, time = 11.56s
+[BernoulliRBM] Iteration 6, pseudo-likelihood = -78.75, time = 11.21s
+[BernoulliRBM] Iteration 7, pseudo-likelihood = -78.43, time = 11.31s
+[BernoulliRBM] Iteration 8, pseudo-likelihood = -76.83, time = 11.39s
+[BernoulliRBM] Iteration 9, pseudo-likelihood = -74.63, time = 11.41s
+[BernoulliRBM] Iteration 10, pseudo-likelihood = -73.92, time = 11.77s
+[BernoulliRBM] Iteration 11, pseudo-likelihood = -73.64, time = 11.29s
+[BernoulliRBM] Iteration 12, pseudo-likelihood = -71.72, time = 11.25s
+[BernoulliRBM] Iteration 13, pseudo-likelihood = -71.73, time = 11.28s
+[BernoulliRBM] Iteration 14, pseudo-likelihood = -71.35, time = 11.42s
+[BernoulliRBM] Iteration 15, pseudo-likelihood = -71.43, time = 11.97s
+[BernoulliRBM] Iteration 16, pseudo-likelihood = -69.04, time = 12.18s
+[BernoulliRBM] Iteration 17, pseudo-likelihood = -69.80, time = 12.14s
+[BernoulliRBM] Iteration 18, pseudo-likelihood = -69.14, time = 11.69s
+[BernoulliRBM] Iteration 19, pseudo-likelihood = -69.92, time = 11.78s
+[BernoulliRBM] Iteration 20, pseudo-likelihood = -68.49, time = 11.59s
+Done!
+Training time (secs): 293.937
+Traing set: 
+Done!
+Prediction time (secs): 0.342
+Classification report for classifier Pipeline(steps=[('rbm', BernoulliRBM(batch_size=10, learning_rate=0.01, n_components=200, n_iter=20,
+       random_state=42, verbose=1)), ('logistic', LogisticRegression(C=15.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False))]):
+             precision    recall  f1-score   support
+
+          0     0.9797    0.9882    0.9839      3316
+          1     0.9860    0.9902    0.9881      3775
+          2     0.9568    0.9571    0.9569      3331
+          3     0.9525    0.9391    0.9457      3414
+          4     0.9634    0.9598    0.9616      3233
+          5     0.9573    0.9486    0.9529      3093
+          6     0.9763    0.9842    0.9802      3352
+          7     0.9685    0.9638    0.9661      3508
+          8     0.9462    0.9585    0.9523      3228
+          9     0.9446    0.9418    0.9432      3350
+
+avg / total     0.9635    0.9635    0.9635     33600
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.100
+Classification report for classifier Pipeline(steps=[('rbm', BernoulliRBM(batch_size=10, learning_rate=0.01, n_components=200, n_iter=20,
+       random_state=42, verbose=1)), ('logistic', LogisticRegression(C=15.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False))]):
+             precision    recall  f1-score   support
+
+          0     0.9757    0.9841    0.9799       816
+          1     0.9770    0.9835    0.9803       909
+          2     0.9585    0.9279    0.9429       846
+          3     0.9437    0.9306    0.9371       937
+          4     0.9578    0.9464    0.9520       839
+          5     0.9248    0.9288    0.9268       702
+          6     0.9551    0.9758    0.9653       785
+          7     0.9669    0.9496    0.9582       893
+          8     0.9211    0.9509    0.9358       835
+          9     0.9277    0.9344    0.9310       838
+
+avg / total     0.9514    0.9513    0.9513      8400
+

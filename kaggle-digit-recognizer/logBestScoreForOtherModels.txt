@@ -1,0 +1,126 @@
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 42000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [4132 4684 4177 4351 4072 3795 4137 4401 4063 4188]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.346
+[ 0.09748496  0.07159942  0.06145625  0.05379059  0.0489404   0.04303019
+  0.03276902  0.02891973  0.02766777  0.02348765  0.0209923   0.02058908
+  0.01702477  0.01692711  0.01581055  0.01483173  0.01319628  0.0128267
+  0.01187922  0.01152703  0.01072143  0.01015154  0.00964859  0.00912805
+  0.00887601  0.00838729  0.00811819  0.00777371  0.00740602  0.00686631
+  0.00657953  0.0063877   0.0059934   0.00588887  0.0056431   0.00540943
+  0.00509199  0.00487483  0.00475548  0.00466524  0.00452932  0.00444969
+  0.00418237  0.00397488  0.00384525  0.00374903  0.00360997  0.00348507
+  0.00336473  0.00320724]
+Done!
+Fit PCA transform time (secs): 3.940
+Done!
+Training time (secs): 0.164
+Traing set: 
+Done!
+Prediction time (secs): 25.924
+Classification report for classifier KNeighborsClassifier(algorithm='kd_tree', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=4, n_neighbors=4, p=2,
+           weights='distance'):
+             precision    recall  f1-score   support
+
+          0     1.0000    1.0000    1.0000      3316
+          1     1.0000    1.0000    1.0000      3775
+          2     1.0000    1.0000    1.0000      3331
+          3     1.0000    1.0000    1.0000      3414
+          4     1.0000    1.0000    1.0000      3233
+          5     1.0000    1.0000    1.0000      3093
+          6     1.0000    1.0000    1.0000      3352
+          7     1.0000    1.0000    1.0000      3508
+          8     1.0000    1.0000    1.0000      3228
+          9     1.0000    1.0000    1.0000      3350
+
+avg / total     1.0000    1.0000    1.0000     33600
+
+
+Test set: 
+Done!
+Prediction time (secs): 7.035
+Classification report for classifier KNeighborsClassifier(algorithm='kd_tree', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=4, n_neighbors=4, p=2,
+           weights='distance'):
+             precision    recall  f1-score   support
+
+          0     0.9866    0.9939    0.9902       816
+          1     0.9742    0.9978    0.9859       909
+          2     0.9809    0.9704    0.9756       846
+          3     0.9804    0.9594    0.9698       937
+          4     0.9902    0.9631    0.9764       839
+          5     0.9673    0.9701    0.9687       702
+          6     0.9749    0.9911    0.9829       785
+          7     0.9709    0.9698    0.9703       893
+          8     0.9769    0.9605    0.9686       835
+          9     0.9432    0.9702    0.9565       838
+
+avg / total     0.9747    0.9745    0.9745      8400
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 42000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [4132 4684 4177 4351 4072 3795 4137 4401 4063 4188]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.367
+Done!
+Training time (secs): 6.930
+Traing set: 
+Done!
+Prediction time (secs): 0.079
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=14,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=5,
+            min_samples_split=7, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     0.9464    0.9689    0.9575      3316
+          1     0.9599    0.9764    0.9681      3775
+          2     0.9210    0.9346    0.9277      3331
+          3     0.9176    0.9194    0.9185      3414
+          4     0.9251    0.9320    0.9285      3233
+          5     0.9327    0.9056    0.9190      3093
+          6     0.9606    0.9535    0.9570      3352
+          7     0.9480    0.9515    0.9498      3508
+          8     0.9291    0.8965    0.9125      3228
+          9     0.9213    0.9188    0.9200      3350
+
+avg / total     0.9366    0.9366    0.9365     33600
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.019
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=14,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=5,
+            min_samples_split=7, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0     0.9046    0.9179    0.9112       816
+          1     0.9044    0.9472    0.9253       909
+          2     0.8363    0.8274    0.8318       846
+          3     0.8449    0.8196    0.8321       937
+          4     0.8534    0.8605    0.8570       839
+          5     0.7827    0.7849    0.7838       702
+          6     0.8889    0.8866    0.8878       785
+          7     0.8990    0.8970    0.8980       893
+          8     0.8210    0.7856    0.8029       835
+          9     0.8343    0.8473    0.8407       838
+
+avg / total     0.8584    0.8588    0.8585      8400

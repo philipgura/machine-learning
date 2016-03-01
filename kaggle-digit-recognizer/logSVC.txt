@@ -1,0 +1,518 @@
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 1000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [107  96 124  90 102  89  97 105  93  97]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.015
+Done!
+Training time (secs): 0.429
+Traing set: 
+Done!
+Prediction time (secs): 0.359
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     0.9890    0.9783    0.9836        92
+          1     0.9125    0.9605    0.9359        76
+          2     0.9775    0.9457    0.9613        92
+          3     0.9481    0.9605    0.9542        76
+          4     0.9605    0.9481    0.9542        77
+          5     0.8987    0.9595    0.9281        74
+          6     0.9518    0.9875    0.9693        80
+          7     0.9398    0.9512    0.9455        82
+          8     0.9437    0.8590    0.8993        78
+          9     0.9155    0.8904    0.9028        73
+
+avg / total     0.9455    0.9450    0.9448       800
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.084
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     0.9375    1.0000    0.9677        15
+          1     0.8636    0.9500    0.9048        20
+          2     0.9630    0.8125    0.8814        32
+          3     0.9333    1.0000    0.9655        14
+          4     0.9524    0.8000    0.8696        25
+          5     0.9286    0.8667    0.8966        15
+          6     0.7391    1.0000    0.8500        17
+          7     0.8500    0.7391    0.7907        23
+          8     0.8462    0.7333    0.7857        15
+          9     0.7241    0.8750    0.7925        24
+
+avg / total     0.8757    0.8650    0.8648       200
+
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 5000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [494 558 545 480 477 469 516 506 477 478]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.047
+Done!
+Training time (secs): 4.801
+Traing set: 
+Done!
+Prediction time (secs): 6.787
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     0.9898    0.9848    0.9873       394
+          1     0.9642    0.9773    0.9707       441
+          2     0.9565    0.9522    0.9543       439
+          3     0.9537    0.9333    0.9434       375
+          4     0.9279    0.9663    0.9467       386
+          5     0.9479    0.9630    0.9554       378
+          6     0.9627    0.9810    0.9718       421
+          7     0.9669    0.9453    0.9560       402
+          8     0.9385    0.9335    0.9360       376
+          9     0.9493    0.9175    0.9332       388
+
+avg / total     0.9561    0.9560    0.9559      4000
+
+
+Test set: 
+Done!
+Prediction time (secs): 1.678
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     0.9320    0.9600    0.9458       100
+          1     0.9187    0.9658    0.9417       117
+          2     0.9245    0.9245    0.9245       106
+          3     0.9388    0.8762    0.9064       105
+          4     0.9167    0.9670    0.9412        91
+          5     0.9512    0.8571    0.9017        91
+          6     0.9293    0.9684    0.9485        95
+          7     0.9151    0.9327    0.9238       104
+          8     0.9300    0.9208    0.9254       101
+          9     0.8851    0.8556    0.8701        90
+
+avg / total     0.9243    0.9240    0.9236      1000
+
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 10000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [ 991 1095 1045 1009  967  906 1003 1039  950  995]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.087
+Done!
+Training time (secs): 16.283
+Traing set: 
+Done!
+Prediction time (secs): 22.091
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     0.9791    0.9888    0.9839       805
+          1     0.9699    0.9831    0.9764       885
+          2     0.9540    0.9552    0.9546       825
+          3     0.9553    0.9402    0.9477       819
+          4     0.9451    0.9730    0.9589       779
+          5     0.9510    0.9537    0.9523       712
+          6     0.9660    0.9779    0.9719       813
+          7     0.9621    0.9454    0.9537       806
+          8     0.9644    0.9363    0.9501       753
+          9     0.9397    0.9315    0.9356       803
+
+avg / total     0.9589    0.9589    0.9588      8000
+
+
+Test set: 
+Done!
+Prediction time (secs): 5.464
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     0.9681    0.9785    0.9733       186
+          1     0.9535    0.9762    0.9647       210
+          2     0.9189    0.9273    0.9231       220
+          3     0.9215    0.9263    0.9239       190
+          4     0.8995    0.9521    0.9251       188
+          5     0.9424    0.9278    0.9351       194
+          6     0.9679    0.9526    0.9602       190
+          7     0.9565    0.9442    0.9503       233
+          8     0.9482    0.9289    0.9385       197
+          9     0.9293    0.8906    0.9096       192
+
+avg / total     0.9407    0.9405    0.9405      2000
+
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 42000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [4132 4684 4177 4351 4072 3795 4137 4401 4063 4188]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.348
+Done!
+Training time (secs): 155.162
+Traing set: 
+Done!
+Prediction time (secs): 246.210
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     0.9814    0.9888    0.9851      3316
+          1     0.9808    0.9881    0.9844      3775
+          2     0.9622    0.9709    0.9665      3331
+          3     0.9627    0.9531    0.9579      3414
+          4     0.9605    0.9709    0.9657      3233
+          5     0.9657    0.9648    0.9652      3093
+          6     0.9786    0.9833    0.9810      3352
+          7     0.9751    0.9698    0.9724      3508
+          8     0.9709    0.9613    0.9661      3228
+          9     0.9591    0.9460    0.9525      3350
+
+avg / total     0.9699    0.9699    0.9699     33600
+
+
+Test set: 
+Done!
+Prediction time (secs): 61.279
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     0.9793    0.9877    0.9835       816
+          1     0.9751    0.9901    0.9825       909
+          2     0.9595    0.9527    0.9561       846
+          3     0.9577    0.9424    0.9500       937
+          4     0.9451    0.9642    0.9546       839
+          5     0.9489    0.9530    0.9510       702
+          6     0.9685    0.9783    0.9734       785
+          7     0.9648    0.9507    0.9577       893
+          8     0.9637    0.9533    0.9585       835
+          9     0.9399    0.9332    0.9365       838
+
+avg / total     0.9605    0.9605    0.9604      8400
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 1000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [107  96 124  90 102  89  97 105  93  97]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.008
+[ 0.09970463  0.07542846  0.06014348  0.05477071  0.04685712  0.04464145
+  0.03249051  0.02892218  0.02756132  0.02434666  0.02255439  0.01989246
+  0.01811031  0.01712279  0.01615998  0.0149236   0.01413976  0.0133436
+  0.01168899  0.01130833  0.01065675  0.01018775  0.00976819  0.0093313
+  0.00913495  0.00836832  0.00823165  0.00795272  0.00728204  0.00712798
+  0.00666459  0.00662843  0.00617452  0.0059818   0.00563298  0.00537264
+  0.00515082  0.00495734  0.00482133  0.00457585  0.0044286   0.00436422
+  0.00421783  0.00406227  0.00394718  0.00390422  0.00380792  0.00360077
+  0.00346856  0.0033972 ]
+Done!
+Fit PCA transform time (secs): 0.201
+Done!
+Training time (secs): 0.114
+Traing set: 
+Done!
+Prediction time (secs): 0.044
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     1.0000    1.0000    1.0000        92
+          1     1.0000    1.0000    1.0000        76
+          2     1.0000    1.0000    1.0000        92
+          3     1.0000    1.0000    1.0000        76
+          4     1.0000    1.0000    1.0000        77
+          5     1.0000    1.0000    1.0000        74
+          6     1.0000    1.0000    1.0000        80
+          7     1.0000    1.0000    1.0000        82
+          8     1.0000    1.0000    1.0000        78
+          9     1.0000    1.0000    1.0000        73
+
+avg / total     1.0000    1.0000    1.0000       800
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.011
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     0.8824    1.0000    0.9375        15
+          1     0.9474    0.9000    0.9231        20
+          2     0.6383    0.9375    0.7595        32
+          3     1.0000    0.9286    0.9630        14
+          4     0.8519    0.9200    0.8846        25
+          5     0.9286    0.8667    0.8966        15
+          6     0.8462    0.6471    0.7333        17
+          7     0.8750    0.6087    0.7179        23
+          8     0.9167    0.7333    0.8148        15
+          9     0.9091    0.8333    0.8696        24
+
+avg / total     0.8596    0.8400    0.8397       200
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 5000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[  0   1   2   3   4   5   6   7   8   9]
+ [494 558 545 480 477 469 516 506 477 478]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.038
+[ 0.09695577  0.07112179  0.06099859  0.05525034  0.04849025  0.04335393
+  0.03219146  0.0285022   0.0281952   0.02344721  0.02171763  0.02043561
+  0.01744285  0.01703605  0.01598681  0.0145585   0.01316614  0.01280298
+  0.01180296  0.01153037  0.01098462  0.01049946  0.00985493  0.00947278
+  0.00890972  0.00844628  0.00820242  0.00795189  0.00732042  0.00677182
+  0.00667498  0.00653126  0.0060238   0.0059005   0.00550833  0.00535837
+  0.00511172  0.00497831  0.00477214  0.00462382  0.00456078  0.00438946
+  0.00436991  0.00407798  0.00388512  0.00379501  0.00358152  0.00356736
+  0.00337233  0.00319064]
+Done!
+Fit PCA transform time (secs): 0.664
+Done!
+Training time (secs): 2.053
+Traing set: 
+Done!
+Prediction time (secs): 0.850
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     1.0000    1.0000    1.0000       394
+          1     1.0000    1.0000    1.0000       441
+          2     1.0000    1.0000    1.0000       439
+          3     1.0000    1.0000    1.0000       375
+          4     1.0000    1.0000    1.0000       386
+          5     1.0000    1.0000    1.0000       378
+          6     1.0000    1.0000    1.0000       421
+          7     0.9975    0.9975    0.9975       402
+          8     1.0000    1.0000    1.0000       376
+          9     0.9974    0.9974    0.9974       388
+
+avg / total     0.9995    0.9995    0.9995      4000
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.217
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     1.0000    0.9700    0.9848       100
+          1     0.9826    0.9658    0.9741       117
+          2     0.8015    0.9906    0.8861       106
+          3     0.9684    0.8762    0.9200       105
+          4     0.9775    0.9560    0.9667        91
+          5     0.9670    0.9670    0.9670        91
+          6     0.9787    0.9684    0.9735        95
+          7     0.9333    0.9423    0.9378       104
+          8     0.9691    0.9307    0.9495       101
+          9     0.9419    0.9000    0.9205        90
+
+avg / total     0.9513    0.9470    0.9477      1000
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 10000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [ 991 1095 1045 1009  967  906 1003 1039  950  995]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.085
+[ 0.09684205  0.07204279  0.06198608  0.05421242  0.04818008  0.04278435
+  0.03210262  0.02871533  0.02818841  0.02351758  0.02110976  0.02030664
+  0.01736905  0.01703758  0.01591722  0.0146375   0.01320362  0.01307263
+  0.01171107  0.01168642  0.01095618  0.01035541  0.00974926  0.00917344
+  0.00889851  0.00843267  0.0082379   0.00780694  0.00737713  0.00685244
+  0.0067294   0.00645679  0.00609894  0.00584133  0.0055445   0.00533571
+  0.00511238  0.0049028   0.00479541  0.00460973  0.00449928  0.00437337
+  0.00428573  0.00400683  0.00391353  0.00379063  0.00361334  0.00348044
+  0.00341823  0.00319392]
+Done!
+Fit PCA transform time (secs): 1.113
+Done!
+Training time (secs): 6.801
+Traing set: 
+Done!
+Prediction time (secs): 2.854
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     1.0000    1.0000    1.0000       805
+          1     0.9989    1.0000    0.9994       885
+          2     0.9988    0.9964    0.9976       825
+          3     1.0000    1.0000    1.0000       819
+          4     1.0000    0.9987    0.9994       779
+          5     1.0000    1.0000    1.0000       712
+          6     1.0000    1.0000    1.0000       813
+          7     0.9950    0.9963    0.9957       806
+          8     1.0000    1.0000    1.0000       753
+          9     0.9975    0.9988    0.9981       803
+
+avg / total     0.9990    0.9990    0.9990      8000
+
+
+Test set: 
+Done!
+Prediction time (secs): 0.720
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     0.9893    0.9946    0.9920       186
+          1     0.9902    0.9667    0.9783       210
+          2     0.9264    0.9727    0.9490       220
+          3     0.9635    0.9737    0.9686       190
+          4     0.9734    0.9734    0.9734       188
+          5     0.9796    0.9897    0.9846       194
+          6     0.9894    0.9842    0.9868       190
+          7     0.9823    0.9528    0.9673       233
+          8     0.9746    0.9746    0.9746       197
+          9     0.9524    0.9375    0.9449       192
+
+avg / total     0.9718    0.9715    0.9715      2000
+
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 42000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [4132 4684 4177 4351 4072 3795 4137 4401 4063 4188]]
+Done!
+Fit MinMaxScaler transform time (secs): 0.384
+[ 0.09748496  0.07159942  0.06145625  0.05379059  0.0489404   0.04303019
+  0.03276902  0.02891973  0.02766777  0.02348765  0.0209923   0.02058908
+  0.01702477  0.01692711  0.01581055  0.01483173  0.01319628  0.0128267
+  0.01187922  0.01152703  0.01072143  0.01015154  0.00964859  0.00912805
+  0.00887601  0.00838729  0.00811819  0.00777371  0.00740602  0.00686631
+  0.00657953  0.0063877   0.0059934   0.00588887  0.0056431   0.00540943
+  0.00509199  0.00487483  0.00475548  0.00466524  0.00452932  0.00444969
+  0.00418237  0.00397488  0.00384525  0.00374903  0.00360997  0.00348507
+  0.00336473  0.00320724]
+Done!
+Fit PCA transform time (secs): 3.848
+Done!
+Training time (secs): 58.298
+Traing set: 
+Done!
+Prediction time (secs): 35.041
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     0.9994    1.0000    0.9997      3316
+          1     0.9976    0.9989    0.9983      3775
+          2     0.9994    0.9982    0.9988      3331
+          3     0.9997    0.9991    0.9994      3414
+          4     0.9981    0.9978    0.9980      3233
+          5     0.9997    0.9994    0.9995      3093
+          6     0.9994    0.9997    0.9996      3352
+          7     0.9946    0.9969    0.9957      3508
+          8     1.0000    0.9991    0.9995      3228
+          9     0.9967    0.9952    0.9960      3350
+
+avg / total     0.9984    0.9984    0.9984     33600
+
+
+Test set: 
+Done!
+Prediction time (secs): 8.811
+Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     0.9914    0.9939    0.9927       816
+          1     0.9912    0.9923    0.9918       909
+          2     0.9753    0.9787    0.9770       846
+          3     0.9764    0.9733    0.9749       937
+          4     0.9820    0.9762    0.9791       839
+          5     0.9786    0.9758    0.9772       702
+          6     0.9860    0.9847    0.9853       785
+          7     0.9832    0.9832    0.9832       893
+          8     0.9693    0.9832    0.9762       835
+          9     0.9747    0.9666    0.9706       838
+
+avg / total     0.9808    0.9808    0.9808      8400
