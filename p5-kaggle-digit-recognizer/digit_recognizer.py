@@ -200,7 +200,7 @@ def predict_labels_final(clf, features):
     y_pred_frame.index +=1
     y_pred_frame.columns = ['Label']
 
-    y_pred_frame.to_csv(path_or_buf='data/test_labels1.csv', sep=',', index=True, index_label='ImageId')
+    y_pred_frame.to_csv(path_or_buf='data/test_labels2.csv', sep=',', index=True, index_label='ImageId')
     print "Test data written!"
     
 
@@ -274,9 +274,8 @@ def run_test(X_train, y_train, X_test, y_test, test_data_final):
     print "Test set: "
     y_pred = predict_labels(clf, X_test, y_test)
 
-    #print "Test set final: "
-    #predict_labels_final(clf, test_data_final)
-
+    print "Test set final: "
+    predict_labels_final(clf, test_data_final)
 
 def run_test_rbm(X_train, y_train, X_test, y_test, test_data_final):
     rbm = BernoulliRBM(learning_rate=0.01, n_iter=20, n_components=350, verbose=1, random_state=42) #learning_rate=0.001, n_iter=20, n_components=200, verbose=1, random_state=42
@@ -297,7 +296,7 @@ def run_test_rbm(X_train, y_train, X_test, y_test, test_data_final):
     # Plot RBM components
     #plot_components(rbm.components_, 'RBM')
 
-    # Logic Regression Raw Data
+    # Logistic Regression Raw Data
     #logistic_classifier = linear_model.LogisticRegression()
     #logistic_classifier.fit(X_train, y_train)
     
@@ -314,10 +313,10 @@ def run(X_train, y_train, X_test, y_test, test_data_final):
 
 
 # get data
-train_data = pd.read_csv("data/train.csv", nrows=1000)
+train_data = pd.read_csv("data/train.csv", nrows=1000) #set to nrows=42000 for full train test, note will take a few hours to run with nudge_dataset
 print "Train data loaded!"
 
-test_data_final = None #pd.read_csv("data/test.csv")
+test_data_final = pd.read_csv("data/test.csv")
 print "Test data loaded!"
 
 feature_cols_all = list(train_data.columns[1:])
@@ -338,13 +337,13 @@ print np.asarray((unique_features, unique_feature_count))
 #print y_train.head()
 
 # Expand the Data Set
-#X_train, y_train = nudge_dataset(X_train, y_train, direction_vectors1)
-#getDataStats(X_train, 'new train')
+X_train, y_train = nudge_dataset(X_train, y_train, direction_vectors1)
+getDataStats(X_train, 'new train')
 
 # calculate unique labels with count (train dataset)
-#unique_features, unique_feature_count = np.unique(y_train, return_counts=True)
-#print "Unique labels with count:"
-#print np.asarray((unique_features, unique_feature_count))
+unique_features, unique_feature_count = np.unique(y_train, return_counts=True)
+print "Unique labels with count:"
+print np.asarray((unique_features, unique_feature_count))
 
 # Scale data
 X_train, scaler = min_max_scaler(X_train)
@@ -364,8 +363,8 @@ X_train, pca = fit_transform_pca(X_train)
 #X_train, ica = fit_transform_ica(X_train)
 
 #final test data
-#test_data_final = scaler.transform(test_data_final)
-#test_data_final = pca.transform(test_data_final)
+test_data_final = scaler.transform(test_data_final)
+test_data_final = pca.transform(test_data_final)
 
 X_mtrain, X_mtest, y_mtrain, y_mtest = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
 
