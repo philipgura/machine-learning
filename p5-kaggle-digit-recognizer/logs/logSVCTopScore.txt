@@ -1,0 +1,100 @@
+Train data loaded!
+Test data loaded!
+Dataset train --------
+Total number of digits (images): 42000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[   0    1    2    3    4    5    6    7    8    9]
+ [4132 4684 4177 4351 4072 3795 4137 4401 4063 4188]]
+Done!
+Nudging time (secs): 28.291
+Dataset new train --------
+Total number of digits (images): 546000
+Total number of features: 784
+Digit image width: 28
+Digit image height: 28
+Unique labels with count:
+[[    0     1     2     3     4     5     6     7     8     9]
+ [53716 60892 54301 56563 52936 49335 53781 57213 52819 54444]]
+
+Warning (from warnings module):
+  File "C:\Python27\lib\site-packages\sklearn\utils\validation.py", line 420
+    warnings.warn(msg, DataConversionWarning)
+DataConversionWarning: Data with input dtype int64 was converted to float64 by MinMaxScaler.
+Done!
+Fit MinMaxScaler transform time (secs): 6.320
+[ 0.07942805  0.05866991  0.05040914  0.0449567   0.04395422  0.03839096
+  0.03530044  0.03139705  0.02805484  0.02611652  0.0221629   0.02105696
+  0.01939131  0.01770734  0.01694211  0.01514445  0.01495217  0.01403297
+  0.01303906  0.01260668  0.01181311  0.01130767  0.01073013  0.01011487
+  0.00971743  0.00891836  0.00885191  0.00864667  0.00806829  0.00773021
+  0.00740499  0.00722153  0.00690577  0.00672269  0.00645449  0.0061271
+  0.00589219  0.00557781  0.00529648  0.00523389  0.00503088  0.00500936
+  0.00482426  0.00464624  0.00432366  0.00426836  0.00409856  0.00400581
+  0.00372867  0.0036992   0.00365333  0.00356923  0.00345557  0.00325327
+  0.00307712  0.00302091  0.0029992   0.00291272  0.00283883  0.00272589
+  0.00265255  0.00263588  0.00253921  0.00246833  0.00236558  0.0023108
+  0.00225202  0.00219769  0.00217993  0.00208525  0.0020646   0.00203556
+  0.00196411  0.00193011  0.0019153   0.00187844  0.00182749  0.00174878
+  0.00168347  0.001652    0.00162031  0.00160012  0.00151554  0.00146898
+  0.00145263  0.00141889  0.00141161  0.0013837   0.00132046  0.00131142
+  0.00129136  0.00127217  0.00122008  0.00121172  0.00118223  0.00116059
+  0.0011459   0.00113092  0.00112804  0.00108124  0.0010603   0.00105385
+  0.00105007  0.0010311   0.00101709  0.00098535  0.0009636   0.00096199
+  0.00090392  0.00089602]
+Done!
+Fit PCA transform time (secs): 76.029
+Done!
+Training time (secs): 6324.001
+Traing set: 
+Done!
+Prediction time (secs): 4135.236
+Classification report for classifier SVC(C=3, cache_size=1000, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=0.008, kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     1.0000    1.0000    1.0000     42929
+          1     0.9996    0.9997    0.9997     48649
+          2     1.0000    0.9997    0.9999     43403
+          3     1.0000    0.9998    0.9999     45167
+          4     0.9997    0.9993    0.9995     42371
+          5     1.0000    1.0000    1.0000     39536
+          6     1.0000    1.0000    1.0000     42949
+          7     0.9988    0.9998    0.9993     45850
+          8     1.0000    0.9999    1.0000     42290
+          9     0.9995    0.9993    0.9994     43656
+
+avg / total     0.9998    0.9998    0.9998    436800
+
+
+Test set: 
+Done!
+Prediction time (secs): 1034.950
+Classification report for classifier SVC(C=3, cache_size=1000, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=0.008, kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0     0.9989    0.9996    0.9993     10787
+          1     0.9981    0.9982    0.9982     12243
+          2     0.9973    0.9985    0.9979     10898
+          3     0.9983    0.9969    0.9976     11396
+          4     0.9981    0.9970    0.9975     10565
+          5     0.9980    0.9979    0.9979      9799
+          6     0.9991    0.9989    0.9990     10832
+          7     0.9953    0.9981    0.9967     11363
+          8     0.9982    0.9976    0.9979     10529
+          9     0.9966    0.9950    0.9958     10788
+
+avg / total     0.9978    0.9978    0.9978    109200
+
+
+Test set final: 
+Done!
+Prediction final time (secs): 265.380
+Test data written!
