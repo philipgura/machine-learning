@@ -15,22 +15,21 @@ Tryied Classifiers:
 - GaussianNB
 - KNeighborsClassifier
 - SVC
+- LogisticRegression with BernoulliRBM
 
-KNeighborsClassifier looked the most promessing (using f1_score)
+SVC looked the most promessing (using f1_score)
 
 ####Optimized Parameters
-- Used GridSearchCV to find the most optimal KNeighborsClassifier parameters
-- Ran GridSearchCV with full training data set to optimize KNeighborsClassifier parameters more.
-- Used BaggingClassifier to take averages of KNeighborsClassifiers
+- Optimized PCA components to 110 vs original 50
+- Used GridSearchCV to find the most optimal SVC parameters
+- Ran GridSearchCV with full training data set to optimize SVC parameters more
 
 ####Final Run
-Ran final test data thought the PCA --> BaggingClassifier --> KNeighborsClassifier
+Ran final test data: Nudge Dataset --> MinMaxScaler --> PCA --> SVC
 
-`PCA(n_components=50, whiten=False)`
+`PCA(n_components=110, whiten=False)`
 
-`KNeighborsClassifier(n_neighbors=4, algorithm="kd_tree", p=2, weights='distance', n_jobs=4)`
-
-`BaggingClassifier(knn, n_estimators=10, max_samples=1.0, max_features=1.0, random_state=42)`
+`svm.SVC(kernel="rbf", C=3, gamma=0.008, cache_size=1000)`
 
 - Outputted the predicted label data to csv file
 - Submitted results to Kaggle
