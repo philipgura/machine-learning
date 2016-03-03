@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from sklearn.cross_validation import train_test_split
 from sklearn.utils import shuffle
+from scipy.ndimage import convolve
 
 import time
 
@@ -24,6 +25,82 @@ def dense_to_one_hot(labels_dense, num_classes):
     labels_one_hot = np.zeros((num_labels, num_classes))
     labels_one_hot.flat[index_offset + labels_dense.ravel()] = 1
     return labels_one_hot
+
+direction_vectors1 = [
+        [[0, 1, 0],
+         [0, 0, 0],
+         [0, 0, 0]],
+
+        [[0, 0, 0],
+         [1, 0, 0],
+         [0, 0, 0]],
+
+        [[0, 0, 0],
+         [0, 0, 1],
+         [0, 0, 0]],
+
+        [[0, 0, 0],
+         [0, 0, 0],
+         [0, 1, 0]],
+
+        [[1, 0, 0],
+         [0, 0, 0],
+         [0, 0, 0]],
+
+        [[0, 0, 1],
+         [0, 0, 0],
+         [0, 0, 0]],
+
+        [[0, 0, 0],
+         [0, 0, 0],
+         [0, 0, 1]],
+
+        [[0, 0, 0],
+         [0, 0, 0],
+         [1, 0, 0]],
+        
+        [[0, 0, 1, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0]],
+
+        [[0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 1, 0, 0]],
+
+        [[0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 1],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0]],
+
+        [[0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [1, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0]]]
+
+def nudge_dataset(X, Y, direction_vectors):
+    """
+    This produces a dataset 5 times bigger than the original one,
+    by moving the 28x28 images in X around by 1px to left, right, down, up
+    """
+    start = time.time()
+    shift = lambda x, w: convolve(x.reshape((28, 28)), mode='constant',
+                                  weights=w).ravel()
+    X = np.concatenate([X] +
+                       [np.apply_along_axis(shift, 1, X, vector)
+                        for vector in direction_vectors])
+    
+    Y = np.concatenate([Y for _ in range(13)], axis=0)
+    end = time.time()
+
+    print "Done!\nNudging time (secs): {:.3f}".format(end - start)
+    
+    return X, Y
 
 train_data = tf.placeholder(tf.float32, shape=[None, 785])
 train_data = pd.read_csv("data/train.csv", nrows=42000)
@@ -59,15 +136,14 @@ y_train_hot = y_train_hot.astype(np.uint8)
 print "Label Shape: "+str(y_train_hot.shape)
 print "Label Sample: "+str(y_train_hot[0])
 
+X_train_all, y_train_hot = nudge_dataset(X_train_all, y_train_hot, direction_vectors1)
+print "Feature Shape (nudge): "+str(X_train_all.shape)
+print "Label Shape (nudge): "+str(y_train_hot.shape)
+
 #convert to [0:255] => [0.0:1.00]
 X_train_all = np.multiply(X_train_all, 1.0 / 255.0)
 
 X_train, X_test, y_train, y_test = train_test_split(X_train_all, y_train_hot, test_size=2000, random_state=42)
-
-#X_train = X_train_all[0:40000]
-#X_test = X_train_all[40000:42000]
-#y_train = y_train_hot[0:40000]
-#y_test = y_train_hot[40000:42000]
 
 index_in_epoch = 0
 epochs_completed = 0
@@ -97,11 +173,6 @@ def get_next_batch(i, batch_size):
     end = index_in_epoch
     
     return X_train[start:end], y_train[start:end]
-    
-    #batch_x = X_train[i*batch_size:i*batch_size+batch_size]
-    #batch_y = y_train[i*batch_size:i*batch_size+batch_size]
-    
-    #return batch_x, batch_y
 
 x = tf.placeholder(tf.float32, shape=[None, 784])
 y_ = tf.placeholder(tf.float32, shape=[None, 10])
@@ -122,28 +193,25 @@ init = tf.initialize_all_variables()
 sess = tf.InteractiveSession()
 sess.run(init)
 
-for i in range(num):
-    batch_x, batch_y = get_next_batch(i, batch_size)
-    train_step.run(session=sess, feed_dict={x: batch_x, y_: batch_y})
+#for i in range(num):
+#    batch_x, batch_y = get_next_batch(i, batch_size)
+#    train_step.run(session=sess, feed_dict={x: batch_x, y_: batch_y})
 
 #for i in range(1000):
 #    batch = mnist.train.next_batch(50)
 #    train_step.run(feed_dict={x: batch[0], y_: batch[1]})
 
 
-correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
+#correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
 
-accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+#accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 #print("MNST Data Acurracy (test): "+str(accuracy.eval(session=sess, feed_dict={x: mnist.test.images, y_: mnist.test.labels})))
-print("My MNST Data Accuracy (test): "+str(accuracy.eval(session=sess, feed_dict={x: X_test, y_: y_test})))
+#print("My MNST Data Accuracy (test): "+str(accuracy.eval(session=sess, feed_dict={x: X_test, y_: y_test})))
 
-prediction = tf.argmax(y,1)
+#prediction = tf.argmax(y,1)
 
-y_pred = prediction.eval(session=sess, feed_dict={x: test_data_final})
-print y_pred[1]
-print y_pred[2]
-print y_pred[3]
+#y_pred = prediction.eval(session=sess, feed_dict={x: test_data_final})
 
 #save_file(y_pred)
 
@@ -207,6 +275,10 @@ correct_prediction = tf.equal(tf.argmax(y_conv,1), tf.argmax(y_,1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 sess.run(tf.initialize_all_variables())
+
+index_in_epoch = 0
+epochs_completed = 0
+num_examples = X_train.shape[0]
 
 start = time.time()
 for i in range(20000):
