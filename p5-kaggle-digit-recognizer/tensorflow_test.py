@@ -3,9 +3,12 @@ import tensorflow as tf
 import numpy as np
 import pandas as pd
 from sklearn.cross_validation import train_test_split
+from sklearn.utils import shuffle
 
-from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
+import time
+
+#from tensorflow.examples.tutorials.mnist import input_data
+#mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 
 def save_file(y_pred):
     y_pred_frame = pd.DataFrame(data=y_pred)
@@ -22,18 +25,17 @@ def dense_to_one_hot(labels_dense, num_classes):
     labels_one_hot.flat[index_offset + labels_dense.ravel()] = 1
     return labels_one_hot
 
-def get_next_batch(X, i, batch_size):
-    batch = X[i*batch_size:i*batch_size+batch_size]
-    
-    return batch
-
 train_data = tf.placeholder(tf.float32, shape=[None, 785])
 train_data = pd.read_csv("data/train.csv", nrows=42000)
 print "Train data loaded!"
 
+#load and format final test data
 test_data_final = tf.placeholder(tf.float32, shape=[None, 784])
 test_data_final = pd.read_csv("data/test.csv")
 print "Test data loaded!"
+
+test_data_final = np.multiply(test_data_final, 1.0 / 255.0)
+#####
 
 feature_cols = list(train_data.columns[1:])
 target_col = train_data.columns[0]
@@ -41,32 +43,65 @@ target_col = train_data.columns[0]
 X_train_all = tf.placeholder(tf.float32, shape=[None, 784])
 X_train = tf.placeholder(tf.float32, shape=[None, 784])
 X_test = tf.placeholder(tf.float32, shape=[None, 784])
-y_train_all = tf.placeholder(tf.float32, shape=[None, 1])
+y_train_all = tf.placeholder(tf.int32, shape=[None, 1])
 
 X_train_all = train_data[feature_cols]
 y_train_all = train_data[target_col]
 
-print X_train_all.shape
+print "Feature Shape: "+str(X_train_all.shape)
 
-y_train_hot = tf.placeholder(tf.float32, shape=[None, 10])
-y_train = tf.placeholder(tf.float32, shape=[None, 10])
-y_test = tf.placeholder(tf.float32, shape=[None, 10])
+y_train = tf.placeholder(tf.int32, shape=[None, 10])
+y_test = tf.placeholder(tf.int32, shape=[None, 10])
 
 y_train_hot = dense_to_one_hot(y_train_all, 10)
 y_train_hot = y_train_hot.astype(np.uint8)
 
-print y_train_hot.shape
-print y_train_hot[0]
+print "Label Shape: "+str(y_train_hot.shape)
+print "Label Sample: "+str(y_train_hot[0])
 
+#convert to [0:255] => [0.0:1.00]
+X_train_all = np.multiply(X_train_all, 1.0 / 255.0)
 
-#X_train, X_test, y_train, y_test = train_test_split(X_train_all, y_train_all, test_size=0.1, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X_train_all, y_train_hot, test_size=2000, random_state=42)
 
-X_train = X_train_all[0:40000]
-X_test = X_train_all[40000:42000]
-y_train = y_train_hot[0:40000]
-y_test = y_train_hot[40000:42000]
+#X_train = X_train_all[0:40000]
+#X_test = X_train_all[40000:42000]
+#y_train = y_train_hot[0:40000]
+#y_test = y_train_hot[40000:42000]
 
-sess = tf.InteractiveSession()
+index_in_epoch = 0
+epochs_completed = 0
+num_examples = X_train.shape[0]
+
+def get_next_batch(i, batch_size):
+    global X_train
+    global y_train
+
+    global index_in_epoch
+    global epochs_completed
+    global num_examples
+    
+    start = index_in_epoch
+    index_in_epoch += batch_size
+    
+    # when all trainig data have been already used, it is reorder randomly    
+    if index_in_epoch > num_examples:
+        # finished epoch
+        epochs_completed += 1
+        # shuffle the data
+        X_train, y_train = shuffle(X_train, y_train)
+        # start next epoch
+        start = 0
+        index_in_epoch = batch_size
+        assert batch_size <= num_examples
+    end = index_in_epoch
+    
+    return X_train[start:end], y_train[start:end]
+    
+    #batch_x = X_train[i*batch_size:i*batch_size+batch_size]
+    #batch_y = y_train[i*batch_size:i*batch_size+batch_size]
+    
+    #return batch_x, batch_y
 
 x = tf.placeholder(tf.float32, shape=[None, 784])
 y_ = tf.placeholder(tf.float32, shape=[None, 10])
@@ -74,40 +109,41 @@ y_ = tf.placeholder(tf.float32, shape=[None, 10])
 W = tf.Variable(tf.zeros([784,10]))
 b = tf.Variable(tf.zeros([10]))
 
-sess.run(tf.initialize_all_variables())
-
 y = tf.nn.softmax(tf.matmul(x,W) + b)
 cross_entropy = -tf.reduce_sum(y_*tf.log(y))
 
 train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
+
 batch_size = 50
 num = X_train.shape[0]/batch_size
-print num
+print "Number of iterations: "+str(num)
 
-#for i in range(num):
-    #batch = mnist.train.next_batch(50)
-    #train_step.run(feed_dict={x: batch[0], y_: batch[1]})
-    #train_step.run(feed_dict={x: get_next_batch(X_train, i, batch_size), y_: get_next_batch(y_train, i, batch_size)})
+init = tf.initialize_all_variables()
+sess = tf.InteractiveSession()
+sess.run(init)
 
 for i in range(num):
-    batch = mnist.train.next_batch(50)
-    train_step.run(feed_dict={x: batch[0], y_: batch[1]})
+    batch_x, batch_y = get_next_batch(i, batch_size)
+    train_step.run(session=sess, feed_dict={x: batch_x, y_: batch_y})
+
+#for i in range(1000):
+#    batch = mnist.train.next_batch(50)
+#    train_step.run(feed_dict={x: batch[0], y_: batch[1]})
 
 
 correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
 
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
-print(accuracy.eval(feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
+#print("MNST Data Acurracy (test): "+str(accuracy.eval(session=sess, feed_dict={x: mnist.test.images, y_: mnist.test.labels})))
+print("My MNST Data Accuracy (test): "+str(accuracy.eval(session=sess, feed_dict={x: X_test, y_: y_test})))
 
-#print(accuracy.eval(feed_dict={x: X_test, y_: y_test}))
+prediction = tf.argmax(y,1)
 
-#prediction = tf.argmax(y,1)
-
-#y_pred = prediction.eval(feed_dict={x: test_data_final})
-#print y_pred[1]
-#print y_pred[2]
-#print y_pred[3]
+y_pred = prediction.eval(session=sess, feed_dict={x: test_data_final})
+print y_pred[1]
+print y_pred[2]
+print y_pred[3]
 
 #save_file(y_pred)
 
@@ -159,7 +195,7 @@ h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)
 W_fc2 = weight_variable([1024, 10])
 b_fc2 = bias_variable([10])
 
-y_conv=tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2)
+y_conv = tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2)
 
 #Train and Evaluate the Model
 cross_entropy = -tf.reduce_sum(y_*tf.log(y_conv))
@@ -172,30 +208,30 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 sess.run(tf.initialize_all_variables())
 
-for i in range(100):
-  batch = mnist.train.next_batch(50)
+start = time.time()
+for i in range(20000):
+  batch_x, batch_y = get_next_batch(i, batch_size)
+  #batch = mnist.train.next_batch(50)
   if i%100 == 0:
-    train_accuracy = accuracy.eval(feed_dict={
-        x:batch[0], y_: batch[1], keep_prob: 1.0})
+    train_accuracy = accuracy.eval(session=sess, feed_dict={x: batch_x, y_: batch_y, keep_prob: 1.0})
     print("step %d, training accuracy %g"%(i, train_accuracy))
-  train_step.run(feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.5})
+  train_step.run(session=sess, feed_dict={x: batch_x, y_: batch_y, keep_prob: 0.5})
+end = time.time()
+print "Done!\nTrain time (secs): {:.3f}".format(end - start)
+print("test accuracy %g"%accuracy.eval(session=sess, feed_dict={x: X_test, y_: y_test, keep_prob: 1.0}))
 
-print("test accuracy %g"%accuracy.eval(feed_dict={
-    x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))
+prediction = tf.argmax(y_conv,1)
+start = time.time()
+y_pred = prediction.eval(session=sess, feed_dict={x: test_data_final, keep_prob: 1.0})
+end = time.time()
+print "Done!\nTest prediction time (secs): {:.3f}".format(end - start)
 
-print(accuracy.eval(feed_dict={x: X_test, y_: y_test, keep_prob: 1.0}))
-
-prediction = tf.argmax(y,1)
-
-y_pred = prediction.eval(feed_dict={x: test_data_final})
-
+print y_pred[0]
 print y_pred[1]
 print y_pred[2]
 print y_pred[3]
-print y_pred[4]
-print y_pred[5]
 
 save_file(y_pred)
 
-
+sess.close()
 
