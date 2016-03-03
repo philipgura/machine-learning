@@ -15,7 +15,7 @@ def save_file(y_pred):
     y_pred_frame.index +=1
     y_pred_frame.columns = ['Label']
 
-    y_pred_frame.to_csv(path_or_buf='data/test_labels5.csv', sep=',', index=True, index_label='ImageId')
+    y_pred_frame.to_csv(path_or_buf='data/test_labelsTensorFlow.csv', sep=',', index=True, index_label='ImageId')
     print "Test data written!"
 
 def dense_to_one_hot(labels_dense, num_classes):
