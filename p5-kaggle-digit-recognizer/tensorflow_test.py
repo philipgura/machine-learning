@@ -16,7 +16,7 @@ def save_file(y_pred):
     y_pred_frame.index +=1
     y_pred_frame.columns = ['Label']
 
-    y_pred_frame.to_csv(path_or_buf='data/test_labelsTensorFlow.csv', sep=',', index=True, index_label='ImageId')
+    y_pred_frame.to_csv(path_or_buf='data/test_labelsTensorFlow2.csv', sep=',', index=True, index_label='ImageId')
     print "Test data written!"
 
 def dense_to_one_hot(labels_dense, num_classes):
@@ -141,7 +141,7 @@ print "Feature Shape (nudge): "+str(X_train_all.shape)
 print "Label Shape (nudge): "+str(y_train_hot.shape)
 
 #convert to [0:255] => [0.0:1.00]
-X_train_all = np.multiply(X_train_all, 1.0 / 255.0)
+X_train_all = np.multiply(X_train_all, 1.0 / 255.0) # (x - 128) / 128 try this
 
 X_train, X_test, y_train, y_test = train_test_split(X_train_all, y_train_hot, test_size=2000, random_state=42)
 
@@ -281,7 +281,7 @@ epochs_completed = 0
 num_examples = X_train.shape[0]
 
 start = time.time()
-for i in range(20000):
+for i in range(40000):
   batch_x, batch_y = get_next_batch(i, batch_size)
   #batch = mnist.train.next_batch(50)
   if i%100 == 0:
