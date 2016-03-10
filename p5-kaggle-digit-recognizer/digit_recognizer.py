@@ -35,6 +35,18 @@ def getDataStats(data, desc):
     print "Digit image width: {}".format(image_width)
     print "Digit image height: {}".format(image_height)
     
+def getLabelsWithCount(y_train):
+    # calculate unique labels with count (train dataset)
+    unique_features, unique_feature_count = np.unique(y_train, return_index=False, return_counts=True)
+    print "Unique labels with count:"
+    print np.asarray((unique_features, unique_feature_count))
+
+    print "Label/Class count mean: "+str(np.mean(unique_feature_count))
+    print "Label/Class count standard deviation: "+str(np.std(unique_feature_count))
+
+#def seperateIntoUnique(X_train, y_train):
+#    for i in range(len(y_train)):
+        
 
 direction_vectors1 = [
         [[0, 1, 0],
@@ -122,26 +134,28 @@ def load_model():
     
     return clf
 
-def plot_components(components, name):
+def draw_mult_images(images, name):
     plt.figure(figsize=(4.2, 4))
-    for i, comp in enumerate(components):
+    for i, comp in enumerate(images):
         plt.subplot(10, 10, i + 1)
         plt.imshow(comp.reshape((28, 28)), cmap=plt.cm.gray_r, interpolation='nearest')
         plt.xticks(())
         plt.yticks(())
-    plt.suptitle(str(components.shape[0])+' components extracted by '+name, fontsize=16)
+    plt.suptitle(str(images.shape[0])+' '+name, fontsize=16)
     plt.subplots_adjust(0.08, 0.02, 0.92, 0.85, 0.08, 0.23)
 
     plt.show()
 
 def draw_image(img):
-    one_image = img.reshape(-1, 1, 28, 28)
+    one_image = img.reshape(28, 28)
+    #print one_image
     
     plt.axis('off')
     plt.imshow(one_image, cmap=cm.binary)
+    plt.show()
 
 def min_max_scaler(X):
-    scaler = MinMaxScaler(feature_range=(-1,1))
+    scaler = MinMaxScaler(feature_range=(-1.0, 1.0))
     start = time.time()
     X = scaler.fit_transform(X)
     end = time.time()
@@ -294,7 +308,7 @@ def run_test_rbm(X_train, y_train, X_test, y_test, test_data_final):
     y_pred = predict_labels(clf, X_test, y_test)
 
     # Plot RBM components
-    #plot_components(rbm.components_, 'RBM')
+    #draw_mult_images(rbm.components_, 'components extracted by RBM')
 
     # Logistic Regression Raw Data
     #logistic_classifier = linear_model.LogisticRegression()
@@ -313,7 +327,7 @@ def run(X_train, y_train, X_test, y_test, test_data_final):
 
 
 # get data
-train_data = pd.read_csv("data/train.csv", nrows=1000) #set to nrows=42000 for full train test, note will take a few hours to run with nudge_dataset
+train_data = pd.read_csv("data/train.csv", nrows=42000) #set to nrows=42000 for full train test, note will take a few hours to run with nudge_dataset
 print "Train data loaded!"
 
 test_data_final = pd.read_csv("data/test.csv")
@@ -325,25 +339,29 @@ target_col_all = train_data.columns[0]
 X_train = train_data[feature_cols_all]
 y_train = train_data[target_col_all]
 
+X_train = np.asarray(X_train)
+
 getDataStats(X_train, 'train')
 #getDataStats(test_data_final, 'test')
 
 # calculate unique labels with count (train dataset)
-unique_features, unique_feature_count = np.unique(y_train, return_counts=True)
-print "Unique labels with count:"
-print np.asarray((unique_features, unique_feature_count))
+getLabelsWithCount(y_train)
 
 #print X_train.head()
 #print y_train.head()
 
+#print sample images
+#draw_mult_images(X_train[0:100], 'sample images')
+
+#print 1 smaple image
+#draw_image(X_train[2])
+
 # Expand the Data Set
-X_train, y_train = nudge_dataset(X_train, y_train, direction_vectors1)
-getDataStats(X_train, 'new train')
+#X_train, y_train = nudge_dataset(X_train, y_train, direction_vectors1)
+#getDataStats(X_train, 'new train')
 
 # calculate unique labels with count (train dataset)
-unique_features, unique_feature_count = np.unique(y_train, return_counts=True)
-print "Unique labels with count:"
-print np.asarray((unique_features, unique_feature_count))
+getLabelsWithCount(y_train)
 
 # Scale data
 X_train, scaler = min_max_scaler(X_train)
@@ -353,12 +371,17 @@ X_train, scaler = min_max_scaler(X_train)
 X_train, pca = fit_transform_pca(X_train)
 
 # Plot PCA components
-#plot_components(pca.components_, 'PCA')
+#draw_mult_images(pca.components_, 'components extracted by PCA')
 
 # Plot PCA componet variance
 #x = np.arange(200)
 #plt.plot(x, 1 - np.cumsum(pca.explained_variance_ratio_), '-')
+#plt.ylabel('Explained variance ratio')
+#plt.xlabel('Number of PCA components')
+#plt.title('Top 200 components of PCA explained variance')
 #plt.show()
+
+exit()
 
 #X_train, ica = fit_transform_ica(X_train)
 
