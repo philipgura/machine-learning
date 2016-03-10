@@ -44,9 +44,7 @@ def getLabelsWithCount(y_train):
     print "Label/Class count mean: "+str(np.mean(unique_feature_count))
     print "Label/Class count standard deviation: "+str(np.std(unique_feature_count))
 
-#def seperateIntoUnique(X_train, y_train):
-#    for i in range(len(y_train)):
-        
+
 
 direction_vectors1 = [
         [[0, 1, 0],
@@ -148,7 +146,7 @@ def draw_mult_images(images, name):
 
 def draw_image(img):
     one_image = img.reshape(28, 28)
-    #print one_image
+    print one_image
     
     plt.axis('off')
     plt.imshow(one_image, cmap=cm.binary)
@@ -273,12 +271,17 @@ def grid_search(X_train, y_train, X_test, y_test):
 
 def run_test(X_train, y_train, X_test, y_test, test_data_final):
 
+    unique_features, unique_feature_count = np.unique(y_train, return_counts=True)
+    weights = dict(zip(unique_features, unique_feature_count))
+
+    print "Class weights: "+str(weights)
+    
     #clf = GaussianNB()
-    #clf = DecisionTreeClassifier(max_depth=14, splitter='best', min_samples_split=7, min_samples_leaf=5)
+    #clf = DecisionTreeClassifier(max_depth=14, splitter='best', min_samples_split=7, min_samples_leaf=5, class_weight=weights)
     #clf = KNeighborsClassifier(n_neighbors=4, algorithm="kd_tree", p=2, weights='distance', n_jobs=4)
     #clf = BaggingClassifier(knn, n_estimators=10, max_samples=1.0, max_features=1.0, random_state=42)
-    clf = svm.SVC(kernel="rbf", C=3, gamma=0.008, cache_size=1000)
-    #clf = svm.SVC(kernel="poly", C=2, gamma=0.01, cache_size=1000, degree=9)
+    clf = svm.SVC(kernel="rbf", C=3, gamma=0.008, class_weight=weights, cache_size=1000)
+    #clf = svm.SVC(kernel="poly", C=2, gamma=0.01, class_weight=weights, cache_size=1000, degree=9)
 
     train_classifier(clf, X_train, y_train)
 
@@ -327,7 +330,7 @@ def run(X_train, y_train, X_test, y_test, test_data_final):
 
 
 # get data
-train_data = pd.read_csv("data/train.csv", nrows=42000) #set to nrows=42000 for full train test, note will take a few hours to run with nudge_dataset
+train_data = pd.read_csv("data/train.csv", nrows=1000) #set to nrows=42000 for full train test, note will take a few hours to run with nudge_dataset
 print "Train data loaded!"
 
 test_data_final = pd.read_csv("data/test.csv")
@@ -357,8 +360,8 @@ getLabelsWithCount(y_train)
 #draw_image(X_train[2])
 
 # Expand the Data Set
-#X_train, y_train = nudge_dataset(X_train, y_train, direction_vectors1)
-#getDataStats(X_train, 'new train')
+X_train, y_train = nudge_dataset(X_train, y_train, direction_vectors1)
+getDataStats(X_train, 'new train')
 
 # calculate unique labels with count (train dataset)
 getLabelsWithCount(y_train)
@@ -366,6 +369,7 @@ getLabelsWithCount(y_train)
 # Scale data
 X_train, scaler = min_max_scaler(X_train)
 #X_train = (X_train - np.min(X_train, 0)) / (np.max(X_train, 0) + 0.0001)
+#draw_image(X_train[2])
 
 # Transform data
 X_train, pca = fit_transform_pca(X_train)
@@ -380,8 +384,6 @@ X_train, pca = fit_transform_pca(X_train)
 #plt.xlabel('Number of PCA components')
 #plt.title('Top 200 components of PCA explained variance')
 #plt.show()
-
-exit()
 
 #X_train, ica = fit_transform_ica(X_train)
 
