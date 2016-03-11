@@ -27,9 +27,11 @@ SVC looked the most promessing (using f1_score)
 ####Final Run
 Ran final test data: Nudge Dataset --> MinMaxScaler --> PCA --> SVC
 
+`MinMaxScaler(feature_range=(-1.0, 1.0))`
+
 `PCA(n_components=110, whiten=False)`
 
-`svm.SVC(kernel="rbf", C=3, gamma=0.008, cache_size=1000)`
+`svm.SVC(kernel="rbf", C=3, gamma=0.008, class_weight=weights, cache_size=1000)`
 
 - Outputted the predicted label data to csv file
 - Submitted results to Kaggle
