@@ -152,6 +152,11 @@ def draw_image(img):
     plt.imshow(one_image, cmap=cm.binary)
     plt.show()
 
+def get_class_weights(y):
+    unique_features, unique_feature_count = np.unique(y, return_counts=True)
+    weights = dict(zip(unique_features, unique_feature_count))
+    return weights
+
 def min_max_scaler(X):
     scaler = MinMaxScaler(feature_range=(-1.0, 1.0))
     start = time.time()
@@ -217,6 +222,8 @@ def predict_labels_final(clf, features):
     
 
 def grid_search(X_train, y_train, X_test, y_test):
+    weights = get_class_weights(y_train)
+    
     #Decision Tree Classifier #####################################
     ###############################################################
     #clf = DecisionTreeClassifier()
@@ -229,11 +236,11 @@ def grid_search(X_train, y_train, X_test, y_test):
 
     #Support Vector Machines ######################################
     ###############################################################
-    #clf = svm.SVC()
-    parameters = {'C': (2,3,4), 'gamma': (0.009,0.008,0.007), 'kernel': ['rbf']}
-    #parameters = {'C': (10,20,40), 'gamma': (0.01,0.001), 'kernel': ['poly'], 'degree': [9]}
-    #parameters = {'C': (5,6), 'gamma': (0.007,0.005), 'kernel': ['poly'], 'degree': [2,3,4]}
-    #parameters = {'C': (2,3,4,5,6,7), 'gamma': (0.015,0.01,0.007,0.005), 'kernel': ['rbf']}
+    clf = svm.SVC()
+    #parameters = {'C': (1,2,3), 'gamma': (0.009,0.008,0.007), 'kernel': ['rbf'], 'class_weight': [weights]}
+    parameters = {'C': (2,5,10), 'gamma': (0.01,0.001), 'kernel': ['poly'], 'degree': [8,9], 'class_weight': [weights]}
+    #parameters = {'C': (5,6), 'gamma': (0.007,0.005), 'kernel': ['poly'], 'degree': [2,3,4], 'class_weight': [weights]}
+    #parameters = {'C': (2,3,4,5,6,7), 'gamma': (0.015,0.01,0.007,0.005), 'kernel': ['rbf'], 'class_weight': [weights]}
 
     #Bernoulli RBM ################################################
     ###############################################################
@@ -270,9 +277,7 @@ def grid_search(X_train, y_train, X_test, y_test):
 
 
 def run_test(X_train, y_train, X_test, y_test, test_data_final):
-
-    unique_features, unique_feature_count = np.unique(y_train, return_counts=True)
-    weights = dict(zip(unique_features, unique_feature_count))
+    weights = get_class_weights(y_train)
 
     print "Class weights: "+str(weights)
     
@@ -345,7 +350,7 @@ y_train = train_data[target_col_all]
 X_train = np.asarray(X_train)
 
 getDataStats(X_train, 'train')
-#getDataStats(test_data_final, 'test')
+getDataStats(test_data_final, 'test')
 
 # calculate unique labels with count (train dataset)
 getLabelsWithCount(y_train)
