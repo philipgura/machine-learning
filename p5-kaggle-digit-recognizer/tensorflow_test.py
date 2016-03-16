@@ -136,9 +136,9 @@ y_train_hot = y_train_hot.astype(np.uint8)
 print "Label Shape: "+str(y_train_hot.shape)
 print "Label Sample: "+str(y_train_hot[0])
 
-X_train_all, y_train_hot = nudge_dataset(X_train_all, y_train_hot, direction_vectors1)
-print "Feature Shape (nudge): "+str(X_train_all.shape)
-print "Label Shape (nudge): "+str(y_train_hot.shape)
+#X_train_all, y_train_hot = nudge_dataset(X_train_all, y_train_hot, direction_vectors1)
+#print "Feature Shape (nudge): "+str(X_train_all.shape)
+#print "Label Shape (nudge): "+str(y_train_hot.shape)
 
 #convert to [0:255] => [0.0:1.00]
 X_train_all = np.multiply(X_train_all, 1.0 / 255.0) # (x - 128) / 128 try this
@@ -227,45 +227,66 @@ def bias_variable(shape):
 def conv2d(x, W):
   return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')
 
-def max_pool_2x2(x):
-  return tf.nn.max_pool(x, ksize=[1, 2, 2, 1],
-                        strides=[1, 2, 2, 1], padding='SAME')
+def max_pool(x, k):
+  return tf.nn.max_pool(x, ksize=[1, k, k, 1], strides=[1, k, k, 1], padding='SAME')
 
+def norm(name, x, lsize=4):
+  return tf.nn.lrn(x, lsize, bias=1.0, alpha=0.001/9.0, beta=0.75, name=name)
 
-#First Convolutional Layer
-W_conv1 = weight_variable([5, 5, 1, 32])
-b_conv1 = bias_variable([32])
 
 x_image = tf.reshape(x, [-1,28,28,1])
 
+# First Convolutional Layer
+W_conv1 = weight_variable([3, 3, 1, 32])
+b_conv1 = bias_variable([32])
+
 h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
-h_pool1 = max_pool_2x2(h_conv1)
+h_pool1 = max_pool(h_conv1, 2)
 
-#Second Convolutional Layer
-W_conv2 = weight_variable([5, 5, 32, 64])
-b_conv2 = bias_variable([64])
+h_norm1 = norm('h_norm1', h_pool1, lsize=4)
 
-h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)
-h_pool2 = max_pool_2x2(h_conv2)
+# Second Convolutional Layer 1x1
+W_conv2 = weight_variable([1, 1, 32, 32])
+b_conv2 = bias_variable([32])
 
-#Densely Connnected Layer
-W_fc1 = weight_variable([7 * 7 * 64, 1024])
-b_fc1 = bias_variable([1024])
+h_conv2 = tf.nn.relu(conv2d(h_norm1, W_conv2) + b_conv2)
 
-h_pool2_flat = tf.reshape(h_pool2, [-1, 7*7*64])
-h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
+# 3rd Convolutional Layer
+W_conv3 = weight_variable([5, 5, 32, 64])
+b_conv3 = bias_variable([64])
 
-#Dropout
+h_conv3 = tf.nn.relu(conv2d(h_conv2, W_conv3) + b_conv3)
+h_pool3 = max_pool(h_conv3, 2)
+
+h_norm2 = norm('h_norm2', h_pool3, lsize=4)
+
+# Densely Connnected Layer
+fc1_nodes = 1024
+W_fc1 = weight_variable([7 * 7 * 64, fc1_nodes])
+b_fc1 = bias_variable([fc1_nodes])
+
+h_pool3_flat = tf.reshape(h_norm2, [-1, 7 * 7 * 64])
+h_fc1 = tf.nn.relu(tf.matmul(h_pool3_flat, W_fc1) + b_fc1)
+
+# Second Densely Connnected Layer
+fc2_nodes = 1024
+W_fc2 = weight_variable([fc1_nodes, fc2_nodes])
+b_fc2 = bias_variable([fc2_nodes])
+
+h_fc2 = tf.nn.relu(tf.matmul(h_fc1, W_fc2) + b_fc2)
+
+# Dropout
 keep_prob = tf.placeholder(tf.float32)
-h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)
+h_fc2_drop = tf.nn.dropout(h_fc2, keep_prob)
 
-#Readout Layer
-W_fc2 = weight_variable([1024, 10])
-b_fc2 = bias_variable([10])
+# Readout Layer
+fc3_nodes = 1024
+W_fc3 = weight_variable([fc3_nodes, 10])
+b_fc3 = bias_variable([10])
 
-y_conv = tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2)
+y_conv = tf.nn.softmax(tf.matmul(h_fc2_drop, W_fc3) + b_fc3)
 
-#Train and Evaluate the Model
+# Train and Evaluate the Model
 cross_entropy = -tf.reduce_sum(y_*tf.log(y_conv))
 
 train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
@@ -281,9 +302,8 @@ epochs_completed = 0
 num_examples = X_train.shape[0]
 
 start = time.time()
-for i in range(40000):
+for i in range(201):
   batch_x, batch_y = get_next_batch(i, batch_size)
-  #batch = mnist.train.next_batch(50)
   if i%100 == 0:
     train_accuracy = accuracy.eval(session=sess, feed_dict={x: batch_x, y_: batch_y, keep_prob: 1.0})
     print("step %d, training accuracy %g"%(i, train_accuracy))
@@ -294,16 +314,16 @@ print("test accuracy %g"%accuracy.eval(session=sess, feed_dict={x: X_test, y_: y
 
 prediction = tf.argmax(y_conv,1)
 start = time.time()
-y_pred = prediction.eval(session=sess, feed_dict={x: test_data_final, keep_prob: 1.0})
+#y_pred = prediction.eval(session=sess, feed_dict={x: test_data_final, keep_prob: 1.0})
 end = time.time()
 print "Done!\nTest prediction time (secs): {:.3f}".format(end - start)
 
-print y_pred[0]
-print y_pred[1]
-print y_pred[2]
-print y_pred[3]
+#print y_pred[0]
+#print y_pred[1]
+#print y_pred[2]
+#print y_pred[3]
 
-save_file(y_pred)
+#save_file(y_pred)
 
 sess.close()
 
