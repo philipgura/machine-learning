@@ -223,7 +223,6 @@ def bias_variable(shape):
   initial = tf.constant(0.1, shape=shape)
   return tf.Variable(initial)
 
-
 def conv2d(x, W):
   return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')
 
@@ -235,17 +234,18 @@ def norm(name, x, lsize=4):
 
 
 x_image = tf.reshape(x, [-1,28,28,1])
+keep_prob = tf.placeholder(tf.float32)
 
-# First Convolutional Layer
-W_conv1 = weight_variable([3, 3, 1, 32])
+# 1st Convolutional Layer
+W_conv1 = weight_variable([5, 5, 1, 32])
 b_conv1 = bias_variable([32])
 
 h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
-h_pool1 = max_pool(h_conv1, 2)
+h_pool1 = max_pool(h_conv1, k=2)
 
 h_norm1 = norm('h_norm1', h_pool1, lsize=4)
 
-# Second Convolutional Layer 1x1
+# 2nd Convolutional Layer 1x1
 W_conv2 = weight_variable([1, 1, 32, 32])
 b_conv2 = bias_variable([32])
 
@@ -256,11 +256,29 @@ W_conv3 = weight_variable([5, 5, 32, 64])
 b_conv3 = bias_variable([64])
 
 h_conv3 = tf.nn.relu(conv2d(h_conv2, W_conv3) + b_conv3)
-h_pool3 = max_pool(h_conv3, 2)
+h_pool3 = max_pool(h_conv3, k=2)
 
 h_norm2 = norm('h_norm2', h_pool3, lsize=4)
 
-# Densely Connnected Layer
+# 4th Convolutional Layer
+#W_conv4 = weight_variable([5, 5, 64, 128])
+#b_conv4 = bias_variable([128])
+
+#h_conv4 = tf.nn.relu(conv2d(h_conv3, W_conv4) + b_conv4)
+#h_pool4 = max_pool(h_conv4, k=2)
+
+#h_norm3 = norm('h_norm3', h_pool4, lsize=4)
+
+# 5th Convolutional Layer
+#W_conv5 = weight_variable([3, 3, 128, 256])
+#b_conv5 = bias_variable([256])
+
+#h_conv5 = tf.nn.relu(conv2d(h_conv4, W_conv5) + b_conv5)
+#h_pool5 = max_pool(h_conv5, 2)
+
+#h_norm4 = norm('h_norm3', h_pool5, lsize=4)
+
+# 1st Densely Connnected Layer
 fc1_nodes = 1024
 W_fc1 = weight_variable([7 * 7 * 64, fc1_nodes])
 b_fc1 = bias_variable([fc1_nodes])
@@ -268,7 +286,10 @@ b_fc1 = bias_variable([fc1_nodes])
 h_pool3_flat = tf.reshape(h_norm2, [-1, 7 * 7 * 64])
 h_fc1 = tf.nn.relu(tf.matmul(h_pool3_flat, W_fc1) + b_fc1)
 
-# Second Densely Connnected Layer
+# Dropout
+h_fc1 = tf.nn.dropout(h_fc1, keep_prob)
+
+# 2nd Densely Connnected Layer
 fc2_nodes = 1024
 W_fc2 = weight_variable([fc1_nodes, fc2_nodes])
 b_fc2 = bias_variable([fc2_nodes])
@@ -276,15 +297,14 @@ b_fc2 = bias_variable([fc2_nodes])
 h_fc2 = tf.nn.relu(tf.matmul(h_fc1, W_fc2) + b_fc2)
 
 # Dropout
-keep_prob = tf.placeholder(tf.float32)
-h_fc2_drop = tf.nn.dropout(h_fc2, keep_prob)
+h_fc2 = tf.nn.dropout(h_fc2, keep_prob)
 
 # Readout Layer
 fc3_nodes = 1024
 W_fc3 = weight_variable([fc3_nodes, 10])
 b_fc3 = bias_variable([10])
 
-y_conv = tf.nn.softmax(tf.matmul(h_fc2_drop, W_fc3) + b_fc3)
+y_conv = tf.nn.softmax(tf.matmul(h_fc2, W_fc3) + b_fc3)
 
 # Train and Evaluate the Model
 cross_entropy = -tf.reduce_sum(y_*tf.log(y_conv))
@@ -302,28 +322,27 @@ epochs_completed = 0
 num_examples = X_train.shape[0]
 
 start = time.time()
-for i in range(201):
+for i in range(20001):
   batch_x, batch_y = get_next_batch(i, batch_size)
   if i%100 == 0:
     train_accuracy = accuracy.eval(session=sess, feed_dict={x: batch_x, y_: batch_y, keep_prob: 1.0})
-    print("step %d, training accuracy %g"%(i, train_accuracy))
+    print("step %d, training accuracy %.5f"%(i, train_accuracy))
   train_step.run(session=sess, feed_dict={x: batch_x, y_: batch_y, keep_prob: 0.5})
 end = time.time()
 print "Done!\nTrain time (secs): {:.3f}".format(end - start)
-print("test accuracy %g"%accuracy.eval(session=sess, feed_dict={x: X_test, y_: y_test, keep_prob: 1.0}))
+print("test accuracy %.5f"%accuracy.eval(session=sess, feed_dict={x: X_test, y_: y_test, keep_prob: 1.0}))
 
 prediction = tf.argmax(y_conv,1)
 start = time.time()
-#y_pred = prediction.eval(session=sess, feed_dict={x: test_data_final, keep_prob: 1.0})
+y_pred = prediction.eval(session=sess, feed_dict={x: test_data_final, keep_prob: 1.0})
 end = time.time()
 print "Done!\nTest prediction time (secs): {:.3f}".format(end - start)
 
-#print y_pred[0]
-#print y_pred[1]
-#print y_pred[2]
-#print y_pred[3]
+print y_pred[0]
+print y_pred[1]
+print y_pred[2]
 
-#save_file(y_pred)
+save_file(y_pred)
 
 sess.close()
 
