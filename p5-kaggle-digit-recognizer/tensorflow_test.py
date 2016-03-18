@@ -287,7 +287,7 @@ h_pool3_flat = tf.reshape(h_norm2, [-1, 7 * 7 * 64])
 h_fc1 = tf.nn.relu(tf.matmul(h_pool3_flat, W_fc1) + b_fc1)
 
 # Dropout
-h_fc1 = tf.nn.dropout(h_fc1, keep_prob)
+#h_fc1 = tf.nn.dropout(h_fc1, keep_prob)
 
 # 2nd Densely Connnected Layer
 fc2_nodes = 1024
@@ -322,7 +322,7 @@ epochs_completed = 0
 num_examples = X_train.shape[0]
 
 start = time.time()
-for i in range(20001):
+for i in range(301):
   batch_x, batch_y = get_next_batch(i, batch_size)
   if i%100 == 0:
     train_accuracy = accuracy.eval(session=sess, feed_dict={x: batch_x, y_: batch_y, keep_prob: 1.0})
@@ -332,17 +332,17 @@ end = time.time()
 print "Done!\nTrain time (secs): {:.3f}".format(end - start)
 print("test accuracy %.5f"%accuracy.eval(session=sess, feed_dict={x: X_test, y_: y_test, keep_prob: 1.0}))
 
-prediction = tf.argmax(y_conv,1)
+#prediction = tf.argmax(y_conv,1)
 start = time.time()
-y_pred = prediction.eval(session=sess, feed_dict={x: test_data_final, keep_prob: 1.0})
+#y_pred = prediction.eval(session=sess, feed_dict={x: test_data_final, keep_prob: 1.0})
 end = time.time()
 print "Done!\nTest prediction time (secs): {:.3f}".format(end - start)
 
-print y_pred[0]
-print y_pred[1]
-print y_pred[2]
+#print y_pred[0]
+#print y_pred[1]
+#print y_pred[2]
 
-save_file(y_pred)
+#save_file(y_pred)
 
 sess.close()
 
