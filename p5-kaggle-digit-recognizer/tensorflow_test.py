@@ -327,7 +327,7 @@ for i in range(301):
   if i%100 == 0:
     train_accuracy = accuracy.eval(session=sess, feed_dict={x: batch_x, y_: batch_y, keep_prob: 1.0})
     print("step %d, training accuracy %.5f"%(i, train_accuracy))
-  train_step.run(session=sess, feed_dict={x: batch_x, y_: batch_y, keep_prob: 0.5})
+  train_step.run(session=sess, feed_dict={x: batch_x, y_: batch_y, keep_prob: 0.7})
 end = time.time()
 print "Done!\nTrain time (secs): {:.3f}".format(end - start)
 print("test accuracy %.5f"%accuracy.eval(session=sess, feed_dict={x: X_test, y_: y_test, keep_prob: 1.0}))
