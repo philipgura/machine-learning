@@ -309,7 +309,7 @@ y_conv = tf.nn.softmax(tf.matmul(h_fc2, W_fc3) + b_fc3)
 # Train and Evaluate the Model
 cross_entropy = -tf.reduce_sum(y_*tf.log(y_conv))
 
-train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
+train_step = tf.train.AdamOptimizer(1e-5).minimize(cross_entropy)
 
 correct_prediction = tf.equal(tf.argmax(y_conv,1), tf.argmax(y_,1))
 
@@ -322,12 +322,12 @@ epochs_completed = 0
 num_examples = X_train.shape[0]
 
 start = time.time()
-for i in range(301):
+for i in range(40001):
   batch_x, batch_y = get_next_batch(i, batch_size)
   if i%100 == 0:
     train_accuracy = accuracy.eval(session=sess, feed_dict={x: batch_x, y_: batch_y, keep_prob: 1.0})
     print("step %d, training accuracy %.5f"%(i, train_accuracy))
-  train_step.run(session=sess, feed_dict={x: batch_x, y_: batch_y, keep_prob: 0.7})
+  train_step.run(session=sess, feed_dict={x: batch_x, y_: batch_y, keep_prob: 0.5})
 end = time.time()
 print "Done!\nTrain time (secs): {:.3f}".format(end - start)
 print("test accuracy %.5f"%accuracy.eval(session=sess, feed_dict={x: X_test, y_: y_test, keep_prob: 1.0}))
