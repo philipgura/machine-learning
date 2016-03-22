@@ -1,6 +1,6 @@
 # Machine Learning Projects
 
-This is portfolio of machine learning projects
+This is a portfolio of machine learning projects
 
 ####Project 1: Predicting Boston Houseing Prices
 Basic machine learning concepts
